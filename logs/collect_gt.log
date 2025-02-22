@@ -1,0 +1,1172 @@
+2025-02-21 22:14:10,999 - INFO - Processing 86 queries
+2025-02-21 22:14:11,006 - INFO - No preprocess SQL for 0
+2025-02-21 22:14:11,007 - INFO - Running SQL 0: SELECT DISTINCT account_id FROM "order" GROUP BY account_id HAVING COUNT(order_id) > 1 AND (MAX(amount) - MIN(amount)) > 12000;
+2025-02-21 22:14:11,010 - INFO - Ran SQL query 0
+2025-02-21 22:14:11,011 - INFO - No clean up SQL for 0
+2025-02-21 22:14:11,011 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_0_output.csv
+2025-02-21 22:14:11,011 - INFO - No preprocess SQL for 1
+2025-02-21 22:14:11,011 - INFO - Running SQL 1: SELECT to_char(CreationDate, 'FMHH:MI:SS') FROM comments;
+2025-02-21 22:14:11,103 - INFO - Ran SQL query 1
+2025-02-21 22:14:11,103 - INFO - No clean up SQL for 1
+2025-02-21 22:14:11,131 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_1_output.csv
+2025-02-21 22:14:11,134 - INFO - Processing SQL 2: DROP TABLE IF EXISTS loan_summary;
+2025-02-21 22:14:11,135 - INFO - Successfully preprocessed SQL 2
+2025-02-21 22:14:11,135 - INFO - Processing SQL 2: CREATE TABLE loan_summary (account_id INT PRIMARY KEY, total_loan_count INT);
+2025-02-21 22:14:11,137 - INFO - Successfully preprocessed SQL 2
+2025-02-21 22:14:11,137 - INFO - Processing SQL 2: INSERT INTO loan_summary (account_id, total_loan_count) SELECT l.account_id, COUNT(*) FROM loan l WHERE l.status = 'A' GROUP BY l.account_id;
+2025-02-21 22:14:11,138 - INFO - Successfully preprocessed SQL 2
+2025-02-21 22:14:11,138 - INFO - Running SQL 2: 
+    UPDATE transactions_1k 
+    SET Amount = 100 
+    FROM ( SELECT customerid, transactionid FROM transactions_1k WHERE Amount = 50 ORDER BY Date LIMIT 100 FOR UPDATE ) sub 
+    JOIN customers c ON c.customerid = sub.customerid WHERE transactions_1k.transactionid = sub.transactionid RETURNING transactions_1k.transactionid, c.Segment;
+   
+2025-02-21 22:14:11,139 - INFO - Ran SQL query 2
+2025-02-21 22:14:11,139 - INFO - No clean up SQL for 2
+2025-02-21 22:14:11,139 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_2_output.csv
+2025-02-21 22:14:11,139 - INFO - Processing SQL 3: CREATE TYPE buildupplayspeedclass_enum AS ENUM ('Balanced', 'Fast', 'Slow');
+2025-02-21 22:14:11,140 - INFO - Successfully preprocessed SQL 3
+2025-02-21 22:14:11,140 - INFO - Processing SQL 3: 
+    ALTER TABLE team_attributes
+    ALTER COLUMN buildupplayspeedclass
+    TYPE buildupplayspeedclass_enum
+    USING buildupplayspeedclass::buildupplayspeedclass_enum;
+2025-02-21 22:14:11,145 - INFO - Successfully preprocessed SQL 3
+2025-02-21 22:14:11,145 - INFO - Running SQL 3: SELECT users.Id, COUNT(posts.Id) FILTER (WHERE AnswerCount > 0) as answered FROM users LEFT JOIN posts ON users.Id = posts.OwnerUserId GROUP BY users.Id ORDER BY answered DESC;
+2025-02-21 22:14:11,221 - INFO - Ran SQL query 3
+2025-02-21 22:14:11,221 - INFO - No clean up SQL for 3
+2025-02-21 22:14:11,231 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_3_output.csv
+2025-02-21 22:14:11,231 - INFO - No preprocess SQL for 4
+2025-02-21 22:14:11,231 - INFO - Running SQL 4: WITH CTE AS ( SELECT link_to_event, COUNT(link_to_member) AS count FROM attendance GROUP BY link_to_event ), CTE2 AS ( SELECT link_to_event, COUNT(budget_id) AS count FROM budget GROUP BY link_to_event) SELECT CTE.link_to_event, CTE.count AS newCount, CTE2.count AS oldCount FROM CTE2 JOIN CTE ON CTE2.link_to_event = CTE.link_to_event WHERE CTE2.count != CTE.count;
+2025-02-21 22:14:11,232 - INFO - Ran SQL query 4
+2025-02-21 22:14:11,232 - INFO - No clean up SQL for 4
+2025-02-21 22:14:11,232 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_4_output.csv
+2025-02-21 22:14:11,232 - INFO - No preprocess SQL for 5
+2025-02-21 22:14:11,232 - INFO - Running SQL 5: SELECT t1.* FROM cards t1 JOIN (SELECT MIN(id) AS id FROM cards GROUP BY artist) t2 ON t1.id = t2.id
+2025-02-21 22:14:11,263 - INFO - Ran SQL query 5
+2025-02-21 22:14:11,264 - INFO - No clean up SQL for 5
+2025-02-21 22:14:11,276 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_5_output.csv
+2025-02-21 22:14:11,276 - INFO - No preprocess SQL for 6
+2025-02-21 22:14:11,277 - INFO - Running SQL 6: SELECT *
+FROM transactions_1k
+WHERE CustomerID = 3
+  AND Date = '2012-08-24'
+
+UNION ALL
+
+SELECT *
+FROM transactions_1k
+WHERE CustomerID = 7626
+  AND Date = '2012-08-24'
+  AND NOT EXISTS (
+    SELECT 1
+    FROM transactions_1k
+    WHERE CustomerID = 3
+      AND Date = '2012-08-24'
+  );
+    
+2025-02-21 22:14:11,277 - INFO - Ran SQL query 6
+2025-02-21 22:14:11,277 - INFO - No clean up SQL for 6
+2025-02-21 22:14:11,277 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_6_output.csv
+2025-02-21 22:14:11,277 - INFO - No preprocess SQL for 7
+2025-02-21 22:14:11,277 - INFO - Running SQL 7: SELECT 'SELECT ' || STRING_AGG('a.' || column_name, ', ') || ' FROM account AS a' FROM information_schema.columns WHERE table_name = 'account' AND table_schema = 'public' AND column_name NOT IN ('account_id', 'date');
+2025-02-21 22:14:11,281 - INFO - Ran SQL query 7
+2025-02-21 22:14:11,281 - INFO - No clean up SQL for 7
+2025-02-21 22:14:11,281 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_7_output.csv
+2025-02-21 22:14:11,281 - INFO - Processing SQL 8: CREATE TABLE assets (id serial, name text, owner text, PRIMARY KEY(id));
+2025-02-21 22:14:11,284 - INFO - Successfully preprocessed SQL 8
+2025-02-21 22:14:11,284 - INFO - Processing SQL 8: CREATE TABLE users (id serial, username text, ref1 text, ref2 text, PRIMARY KEY(id));
+2025-02-21 22:14:11,284 - INFO - Processing SQL 8: INSERT INTO assets (name, owner) VALUES ('#1', 'a'), ('#2', 'b'), ('#3', 'c'), ('#4', 'a'), ('#5', 'c'), ('#6', 'd'), ('#7', 'e'), ('#8', 'd'), ('#9', 'a'), ('#10', 'a'), ('#11', 'z');
+2025-02-21 22:14:11,285 - INFO - Processing SQL 8: INSERT INTO users (username, ref1, ref2) VALUES ('bobo', 'a', 'd'), ('toto', 'b', 'e'), ('momo', 'c', 'd'), ('lolo', 'a', 'f'), ('popo', 'c', 'f');
+2025-02-21 22:14:11,285 - INFO - Running SQL 8: SELECT *
+FROM
+(
+  SELECT DISTINCT ON (account_id) *
+  FROM
+  (
+    (
+      SELECT
+        account.account_id,
+        account.frequency,
+        l.loan_id,
+        l.date AS loan_date,
+        0 AS priority
+      FROM account
+      LEFT JOIN loan l
+        ON account.account_id = l.account_id
+      WHERE account.district_id = '18'
+        AND l.date >= (NOW() - INTERVAL '48 hours')
+      ORDER BY l.date DESC NULLS LAST
+      LIMIT 6
+    )
+    UNION
+    (
+      SELECT
+        account.account_id,
+        account.frequency,
+        l.loan_id,
+        l.date AS loan_date,
+        1 AS priority
+      FROM account
+      LEFT JOIN loan l
+        ON account.account_id = l.account_id
+      WHERE account.district_id = '18'
+    )
+  ) t
+  ORDER BY account_id, priority
+) t
+ORDER BY priority, loan_date DESC;
+2025-02-21 22:14:11,286 - INFO - Ran SQL query 8
+2025-02-21 22:14:11,286 - INFO - Cleaning up SQL 8: drop table if exists users;
+2025-02-21 22:14:11,286 - INFO - Cleaning up SQL 8: drop table if exists assets;
+2025-02-21 22:14:11,286 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_8_output.csv
+2025-02-21 22:14:11,286 - INFO - No preprocess SQL for 9
+2025-02-21 22:14:11,286 - INFO - Running SQL 9: SELECT json_agg(events_array) AS all_events
+FROM (
+  SELECT 
+    json_agg(
+      json_build_object(
+        'link_to_member', link_to_member,
+        'link_to_event',  link_to_event
+      )
+    ) AS events_array
+  FROM attendance
+  GROUP BY link_to_event
+) sub;
+2025-02-21 22:14:11,287 - ERROR - Error executing query: current transaction is aborted, commands ignored until end of transaction block
+
+2025-02-21 22:14:11,287 - INFO - No clean up SQL for 9
+2025-02-21 22:14:11,287 - INFO - Processing SQL 10: ALTER TABLE attendance ADD COLUMN attend INTEGER DEFAULT 0;
+2025-02-21 22:14:11,287 - INFO - Running SQL 10: SELECT generate_series(
+  EXTRACT(YEAR FROM MIN(date)::timestamptz AT TIME ZONE 'UTC')::int,
+  EXTRACT(YEAR FROM MAX(date)::timestamptz AT TIME ZONE 'UTC')::int
+)::text AS the_year
+FROM loan;
+2025-02-21 22:14:11,287 - INFO - Ran SQL query 10
+2025-02-21 22:14:11,287 - INFO - Cleaning up SQL 10: ALTER TABLE attendance DROP COLUMN attend;
+2025-02-21 22:14:11,287 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_10_output.csv
+2025-02-21 22:14:11,287 - INFO - Processing SQL 11: 
+    ALTER TABLE account
+    ALTER COLUMN date
+    TYPE BIGINT
+    USING to_char(date, 'YYYYMMDD')::bigint;
+    
+2025-02-21 22:14:11,287 - INFO - Running SQL 11: SELECT *, MAX(amount) OVER (PARTITION BY account_id) "max" FROM loan
+2025-02-21 22:14:11,288 - INFO - Ran SQL query 11
+2025-02-21 22:14:11,288 - INFO - No clean up SQL for 11
+2025-02-21 22:14:11,289 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_11_output.csv
+2025-02-21 22:14:11,289 - INFO - Processing SQL 12: DELETE FROM cards WHERE artist NOT IN ('Ralph Horsley', 'Daarken') LIMIT 1000;
+2025-02-21 22:14:11,290 - INFO - Processing SQL 12: DELETE FROM cards WHERE artist IS NULL LIMIT 1000;
+2025-02-21 22:14:11,290 - INFO - Processing SQL 12: CREATE TABLE cards_new AS SELECT id, artist, bordercolor FROM cards;
+2025-02-21 22:14:11,329 - INFO - Successfully preprocessed SQL 12
+2025-02-21 22:14:11,329 - INFO - Processing SQL 12: DROP TABLE cards;
+2025-02-21 22:14:11,330 - INFO - Processing SQL 12: ALTER TABLE cards_new RENAME TO cards;
+2025-02-21 22:14:11,331 - INFO - Running SQL 12: WITH ins AS (INSERT INTO cards (uuid, name) VALUES ('5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c', 'Ancestor''s Chosen') ON CONFLICT (uuid) DO UPDATE SET uuid = NULL WHERE FALSE RETURNING id) SELECT id FROM ins UNION ALL SELECT id FROM cards WHERE uuid = '5f8287b1-5bb6-5f4c-ad17-316a40d5bb0c' LIMIT 1;
+2025-02-21 22:14:11,332 - INFO - Ran SQL query 12
+2025-02-21 22:14:11,332 - INFO - No clean up SQL for 12
+2025-02-21 22:14:11,332 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_12_output.csv
+2025-02-21 22:14:11,332 - INFO - No preprocess SQL for 13
+2025-02-21 22:14:11,332 - INFO - Running SQL 13: INSERT INTO account (account_id, district_id, frequency, date) VALUES (1, 18, 'POPLATEK MESICNE', CURRENT_DATE) ON CONFLICT (account_id) DO UPDATE SET date = CURRENT_DATE RETURNING *, CASE WHEN xmax = 0 THEN 'INSERT' ELSE 'UPDATE' END AS operation_type;
+2025-02-21 22:14:11,332 - INFO - Ran SQL query 13
+2025-02-21 22:14:11,332 - INFO - No clean up SQL for 13
+2025-02-21 22:14:11,332 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_13_output.csv
+2025-02-21 22:14:11,332 - INFO - No preprocess SQL for 14
+2025-02-21 22:14:11,332 - INFO - Running SQL 14: SELECT (select r.relname from pg_class r where r.oid = c.confrelid) as base_table, a.attname as base_col, (select r.relname from pg_class r where r.oid = c.conrelid) as referencing_table, UNNEST((select array_agg(attname) from pg_attribute where attrelid = c.conrelid and array[attnum] <@ c.conkey)) as referencing_col, pg_get_constraintdef(c.oid) contraint_sql  FROM pg_constraint c join pg_attribute a on c.confrelid=a.attrelid and a.attnum = ANY(confkey) WHERE c.confrelid = (select oid from pg_class where relname = 'users') AND c.confrelid!=c.conrelid;
+2025-02-21 22:14:11,333 - INFO - Ran SQL query 14
+2025-02-21 22:14:11,333 - INFO - No clean up SQL for 14
+2025-02-21 22:14:11,333 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_14_output.csv
+2025-02-21 22:14:11,333 - INFO - No preprocess SQL for 15
+2025-02-21 22:14:11,333 - INFO - Running SQL 15: SELECT bank, first_value(bank) over (partition by account_id order by date rows between current row and unbounded following) as next_bank FROM trans WHERE bank is not null ORDER BY account_id, date;
+2025-02-21 22:14:11,605 - INFO - Ran SQL query 15
+2025-02-21 22:14:11,605 - INFO - No clean up SQL for 15
+2025-02-21 22:14:11,645 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_15_output.csv
+2025-02-21 22:14:11,652 - INFO - Processing SQL 16: 
+2025-02-21 22:14:11,653 - INFO - Running SQL 16: SELECT t1.team_api_id, t1.team_short_name, t2.buildUpPlaySpeed FROM Team t1 INNER JOIN Team_Attributes t2 ON t1.team_api_id = t2.team_api_id
+2025-02-21 22:14:11,654 - INFO - Ran SQL query 16
+2025-02-21 22:14:11,654 - INFO - Cleaning up SQL 16: 
+2025-02-21 22:14:11,655 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_16_output.csv
+2025-02-21 22:14:11,655 - INFO - Processing SQL 17: 
+2025-02-21 22:14:11,655 - INFO - Running SQL 17: WITH years AS ( SELECT date_trunc('year', date) as year, COUNT(*) as count FROM trans GROUP BY 1 UNION ALL SELECT date_trunc('year', date) as year, COUNT(*) as count FROM loan GROUP BY 1 ) SELECT year, SUM(count) as count FROM years GROUP BY year ORDER BY year;
+2025-02-21 22:14:11,751 - INFO - Ran SQL query 17
+2025-02-21 22:14:11,751 - INFO - Cleaning up SQL 17: 
+2025-02-21 22:14:11,751 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_17_output.csv
+2025-02-21 22:14:11,751 - INFO - Processing SQL 18: 
+2025-02-21 22:14:11,751 - INFO - Running SQL 18: WITH gen_transactions AS (SELECT CustomerID, Amount FROM transactions_1k CROSS JOIN LATERAL generate_series(1, CAST(Amount AS INTEGER))), shuffle AS (SELECT CustomerID, Amount, row_number() OVER (ORDER BY random()) AS rn FROM gen_transactions) SELECT CustomerID, Amount FROM shuffle WHERE rn <= 5 ORDER BY rn;
+2025-02-21 22:14:11,783 - INFO - Ran SQL query 18
+2025-02-21 22:14:11,783 - INFO - Cleaning up SQL 18: 
+2025-02-21 22:14:11,783 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_18_output.csv
+2025-02-21 22:14:11,783 - INFO - No preprocess SQL for 19
+2025-02-21 22:14:11,783 - INFO - Running SQL 19: 
+SELECT t.k_symbol, t.operation, t.amount, t.balance, a.frequency
+FROM (
+    SELECT DISTINCT ON (t.k_symbol) 
+           t.k_symbol, t.operation, t.amount, t.balance, t.account_id, t.date
+    FROM trans t
+    WHERE t.account_id = 1
+    AND t.type = 'PRIJEM'
+    ORDER BY t.k_symbol, t.date
+) t
+INNER JOIN account a ON t.account_id = a.account_id LIMIT 100
+
+2025-02-21 22:14:11,816 - INFO - Ran SQL query 19
+2025-02-21 22:14:11,816 - INFO - Cleaning up SQL 19: DROP TABLE IF EXISTS client_information;
+2025-02-21 22:14:11,817 - INFO - Successfully cleaned up SQL 19
+2025-02-21 22:14:11,817 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_19_output.csv
+2025-02-21 22:14:11,817 - INFO - No preprocess SQL for 20
+2025-02-21 22:14:11,817 - INFO - Running SQL 20: SELECT player_api_id, date, overall_rating FROM Player_Attributes ORDER BY ROW_NUMBER() OVER(PARTITION BY player_api_id ORDER BY date DESC) FETCH FIRST 1 ROWS WITH TIES;
+2025-02-21 22:14:11,996 - INFO - Ran SQL query 20
+2025-02-21 22:14:11,996 - INFO - No clean up SQL for 20
+2025-02-21 22:14:12,001 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_20_output.csv
+2025-02-21 22:14:12,002 - INFO - No preprocess SQL for 21
+2025-02-21 22:14:12,002 - INFO - Running SQL 21: CREATE OR REPLACE FUNCTION get_user_ages() RETURNS setof numeric AS $BODY$ DECLARE curr_age  text; BEGIN FOR curr_age IN SELECT Age FROM users LOOP BEGIN RETURN NEXT curr_age::numeric; EXCEPTION WHEN OTHERS THEN NULL; END; END LOOP; END $BODY$  LANGUAGE plpgsql; SELECT * FROM get_user_ages();
+2025-02-21 22:14:12,034 - INFO - Ran SQL query 21
+2025-02-21 22:14:12,034 - INFO - Cleaning up SQL 21: UPDATE account SET date = '1995-03-24'
+2025-02-21 22:14:12,047 - INFO - Successfully cleaned up SQL 21
+2025-02-21 22:14:12,047 - INFO - Cleaning up SQL 21: DELETE FROM account WHERE account_id = 22222
+2025-02-21 22:14:12,047 - INFO - Successfully cleaned up SQL 21
+2025-02-21 22:14:12,052 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_21_output.csv
+2025-02-21 22:14:12,053 - INFO - Processing SQL 22: CREATE TEMP TABLE sets_releaseInfo (id SERIAL, releaseDate DATE, setCode VARCHAR(50));
+2025-02-21 22:14:12,054 - INFO - Successfully preprocessed SQL 22
+2025-02-21 22:14:12,054 - INFO - Processing SQL 22: INSERT INTO sets_releaseInfo (releaseDate, setCode) VALUES ('2019-12-28', '10E'), ('2019-12-28', '10E'), ('2019-12-29', '10E'), ('2019-12-29', '10E'), ('2019-12-31', '10E'), ('2019-12-31', '10E'), ('2020-01-01', '10E'), ('2020-01-01', '10E'), ('2020-01-02', '10E'), ('2020-01-03', '10E'), ('2020-01-04', '10E'), ('2020-01-04', '10E'), ('2020-01-05', '10E'), ('2020-01-22', '10E'), ('2020-01-29', '10E'), ('2020-01-30', '10E');
+2025-02-21 22:14:12,054 - INFO - Successfully preprocessed SQL 22
+2025-02-21 22:14:12,054 - INFO - Running SQL 22: SELECT * FROM cards WHERE  3 = (CASE WHEN availability = 'paper' THEN 1 ELSE 0 END) + (CASE WHEN bordercolor = 'black' THEN 1 ELSE 0 END) + (CASE WHEN rarity = 'uncommon' THEN 1 ELSE 0 END) + (CASE WHEN types = 'Creature' THEN 1 ELSE 0 END);
+2025-02-21 22:14:12,157 - INFO - Ran SQL query 22
+2025-02-21 22:14:12,157 - INFO - Cleaning up SQL 22: DROP TABLE IF EXISTS sets_releaseInfo;
+2025-02-21 22:14:12,158 - INFO - Successfully cleaned up SQL 22
+2025-02-21 22:14:12,308 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_22_output.csv
+2025-02-21 22:14:12,314 - INFO - Processing SQL 23: CREATE TABLE collection (id INTEGER NOT NULL PRIMARY KEY, nextCardId INTEGER)
+2025-02-21 22:14:12,316 - INFO - Successfully preprocessed SQL 23
+2025-02-21 22:14:12,316 - INFO - Processing SQL 23: INSERT INTO collection (id, nextCardId) VALUES (1, 5), (2, NULL), (3, 6), (4, 7), (5, 8), (6, 9), (7, NULL), (8, NULL), (9, 10), (10, NULL);
+2025-02-21 22:14:12,316 - INFO - Successfully preprocessed SQL 23
+2025-02-21 22:14:12,316 - INFO - Running SQL 23: SELECT d.driverId, COALESCE(SUM(r.points), 0) AS total_points FROM drivers d LEFT JOIN results r ON d.driverId = r.driverId GROUP BY d.driverId
+2025-02-21 22:14:12,324 - INFO - Ran SQL query 23
+2025-02-21 22:14:12,324 - INFO - Cleaning up SQL 23: DROP TABLE IF EXISTS collection
+2025-02-21 22:14:12,324 - INFO - Successfully cleaned up SQL 23
+2025-02-21 22:14:12,325 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_23_output.csv
+2025-02-21 22:14:12,325 - INFO - No preprocess SQL for 24
+2025-02-21 22:14:12,325 - INFO - Running SQL 24: SELECT 
+    sqA.alignment_count     AS total_by_alignment,
+    A.alignment             AS alignment,
+    R.race                  AS race,
+    sqAR.alignment_race_count AS count_by_alignment_race
+FROM
+    (
+       SELECT
+           alignment_id,
+           COUNT(*) AS alignment_count
+       FROM superhero
+       GROUP BY alignment_id
+    ) sqA
+
+    INNER JOIN
+    (
+       SELECT
+           alignment_id,
+           race_id,
+           COUNT(*) AS alignment_race_count
+       FROM superhero
+       GROUP BY alignment_id, race_id
+    ) sqAR ON sqA.alignment_id = sqAR.alignment_id
+
+    INNER JOIN alignment A ON sqA.alignment_id = A.id
+
+    INNER JOIN race R ON sqAR.race_id = R.id
+ORDER BY
+    A.alignment,
+    R.race;
+2025-02-21 22:14:12,326 - INFO - Ran SQL query 24
+2025-02-21 22:14:12,326 - INFO - Cleaning up SQL 24: DROP FUNCTION what_quarter_is(date, integer);
+2025-02-21 22:14:12,326 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_24_output.csv
+2025-02-21 22:14:12,327 - INFO - No preprocess SQL for 25
+2025-02-21 22:14:12,327 - INFO - Running SQL 25: select driverId, points, array_agg(driverId) over (order by points asc) as "array_agg(driverId) with order", array_agg(driverId) over () as "array_agg(driverId) without order" from results where raceId = 19 order by driverId asc
+2025-02-21 22:14:12,327 - ERROR - Error executing query: current transaction is aborted, commands ignored until end of transaction block
+
+2025-02-21 22:14:12,327 - INFO - No clean up SQL for 25
+2025-02-21 22:14:12,327 - INFO - Processing SQL 26: ALTER TABLE trans ADD COLUMN next_amount int;
+2025-02-21 22:14:12,327 - INFO - Running SQL 26: WITH cte AS (
+    SELECT
+        p.*,
+        CEIL( (ROW_NUMBER() OVER (
+                 PARTITION BY raceId 
+                 ORDER BY time::time
+               ) + 1 ) / 2.0
+        ) AS rn
+    FROM pitStops p
+    WHERE raceId = 842
+),
+cte2 AS (
+    SELECT
+        rn,
+        MIN(time::time) AS starttime,
+        MAX(time::time) AS endtime,
+        CAST(MAX(time::time) - MIN(time::time) AS time) AS total_pause
+    FROM cte
+    GROUP BY rn
+)
+SELECT
+    MAX(endtime) AS endtime,
+    MIN(starttime) AS starttime,
+    CAST(SUM(total_pause) AS time) AS total_pit_stop_duration
+FROM cte2;
+2025-02-21 22:14:12,328 - INFO - Ran SQL query 26
+2025-02-21 22:14:12,328 - INFO - Cleaning up SQL 26: ALTER TABLE trans DROP COLUMN next_amount;
+2025-02-21 22:14:12,328 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_26_output.csv
+2025-02-21 22:14:12,328 - INFO - No preprocess SQL for 27
+2025-02-21 22:14:12,328 - INFO - Running SQL 27: SELECT json_object_agg(label, groupedMolecules) AS molecules_by_label
+FROM (
+  SELECT label,
+         json_agg(
+           json_build_object(
+             'molecule_id', molecule.molecule_id,
+             'atoms', (
+               SELECT json_agg(
+                 json_build_object(
+                   'atom_id', atom.atom_id,
+                   'element', atom.element
+                 )
+               )
+               FROM atom
+               WHERE atom.molecule_id = molecule.molecule_id
+             ),
+             'bonds', (
+               SELECT json_agg(
+                 json_build_object(
+                   'bond_id', bond.bond_id,
+                   'bond_type', bond.bond_type
+                 )
+               )
+               FROM bond
+               WHERE bond.molecule_id = molecule.molecule_id
+             )
+           )
+         ) AS groupedMolecules
+  FROM molecule
+  GROUP BY label
+) AS sub;
+2025-02-21 22:14:12,328 - ERROR - Error executing query: current transaction is aborted, commands ignored until end of transaction block
+
+2025-02-21 22:14:12,328 - INFO - No clean up SQL for 27
+2025-02-21 22:14:12,328 - INFO - No preprocess SQL for 28
+2025-02-21 22:14:12,328 - INFO - Running SQL 28: SELECT
+    molecule_id,
+    COUNT(DISTINCT CASE WHEN element = 'na' THEN 1 END)         AS na_atoms,
+    COUNT(DISTINCT CASE WHEN element IN ('c', 'cl') THEN molecule_id END) AS c_atoms
+FROM atom
+GROUP BY molecule_id;
+2025-02-21 22:14:12,328 - ERROR - Error executing query: current transaction is aborted, commands ignored until end of transaction block
+
+2025-02-21 22:14:12,328 - INFO - No clean up SQL for 28
+2025-02-21 22:14:12,328 - INFO - No preprocess SQL for 29
+2025-02-21 22:14:12,328 - INFO - Running SQL 29: SELECT date_trunc('hour', "date"::timestamp), home_team_api_id, AVG(home_team_goal) as avg_home_goals, AVG(away_team_goal) as avg_away_goals, SUM(home_team_goal) as total_home_goals, SUM(away_team_goal) as total_away_goals, MAX(home_team_goal) as max_home_goals, MIN(home_team_goal) as min_home_goals, COUNT(home_team_api_id) as count FROM Match GROUP BY date_trunc('hour', "date"::timestamp), home_team_api_id;
+2025-02-21 22:14:12,329 - ERROR - Error executing query: current transaction is aborted, commands ignored until end of transaction block
+
+2025-02-21 22:14:12,329 - INFO - No clean up SQL for 29
+2025-02-21 22:14:12,329 - INFO - Processing SQL 30: 
+CREATE TABLE card_information (price JSONB); 
+INSERT INTO card_information (price) VALUES 
+('[{"a": 1}, {"b": 2}, {"c": 0.5}]'::jsonb), 
+('[{"d": 2.2}, {"e": 2.4}, {"f": 3.5}]'::jsonb), 
+('[{"g": 1.7}, {"h": 5.4}, {"i": 8.9}]'::jsonb);
+SELECT * FROM card_information;
+
+2025-02-21 22:14:12,329 - INFO - Running SQL 30: WITH cte AS (
+    SELECT
+        m.*,
+        SUM(
+          CASE WHEN m.home_team_goal = m.away_team_goal THEN 1 ELSE 0 END
+        ) OVER (ORDER BY m.date) AS grp
+    FROM match AS m
+),
+aggregates AS (
+    SELECT
+        grp,
+        MAX(date) FILTER (WHERE home_team_goal = away_team_goal) AS draw_date,
+        1 AS invoiced,
+        SUM(home_team_goal + away_team_goal) AS total_goals
+    FROM cte
+    GROUP BY grp
+)
+SELECT 
+    grp,
+    draw_date AS date,
+    invoiced,
+    total_goals AS amount
+FROM aggregates
+WHERE draw_date IS NOT NULL
+ORDER BY grp;
+2025-02-21 22:14:12,365 - INFO - Ran SQL query 30
+2025-02-21 22:14:12,366 - INFO - Cleaning up SQL 30: DROP TABLE card_information;
+2025-02-21 22:14:12,366 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_30_output.csv
+2025-02-21 22:14:12,367 - INFO - Processing SQL 31: 
+2025-02-21 22:14:12,367 - INFO - Running SQL 31: WITH last_per_station AS (
+  SELECT
+    t.*,
+    ROW_NUMBER() OVER (
+      PARTITION BY customerid, gasstationid
+      ORDER BY transactionid DESC
+    ) AS rn
+  FROM transactions_1k t
+),
+DataSource AS (
+  SELECT
+    lps.*,
+    CASE WHEN amount < 10 THEN transactionid END AS fail_id,
+    CASE WHEN amount >= 10 THEN transactionid END AS pass_id
+  FROM last_per_station lps
+  WHERE rn = 1
+),
+Calculated AS (
+  SELECT
+    ds.*,
+    MIN(fail_id) OVER (PARTITION BY customerid) AS earliest_fail_id,
+    MAX(pass_id) OVER (PARTITION BY customerid) AS last_pass_id
+  FROM DataSource ds
+)
+SELECT
+  customerid,
+  transactionid,
+  date,
+  time,
+  gasstationid,
+  productid,
+  amount,
+  price
+FROM Calculated
+WHERE
+  (earliest_fail_id IS NOT NULL AND fail_id = earliest_fail_id)
+  OR
+  (earliest_fail_id IS NULL AND pass_id = last_pass_id);
+2025-02-21 22:14:12,369 - INFO - Ran SQL query 31
+2025-02-21 22:14:12,369 - INFO - Cleaning up SQL 31: 
+2025-02-21 22:14:12,369 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_31_output.csv
+2025-02-21 22:14:12,369 - INFO - Processing SQL 32: 
+CREATE TABLE purchase ( purchase_date VARCHAR(255), user_id VARCHAR(255) ); INSERT INTO purchase(purchase_date, user_id) VALUES('2020-03', 'alex01'), ('2020-04', 'alex01'), ('2020-05', 'alex01'), ('2020-06', 'alex01'), ('2020-12', 'alex01'), ('2021-01', 'alex01'), ('2021-02', 'alex01'), ('2021-03', 'alex01'), ('2020-04', 'jon03'), ('2020-05', 'jon03'), ('2020-06', 'jon03'), ('2020-09', 'jon03'), ('2021-11', 'jon03'), ('2021-12', 'jon03'), ('2022-01', 'jon03'), ('2022-02', 'jon03'), ('2020-05', 'mark05'), ('2020-06', 'mark05'), ('2020-07', 'mark05'), ('2020-08', 'mark05'), ('2020-09', 'mark05');
+
+2025-02-21 22:14:12,371 - INFO - Successfully preprocessed SQL 32
+2025-02-21 22:14:12,371 - INFO - Running SQL 32: 
+        SELECT 
+            CASE 
+                WHEN EXISTS (
+                    SELECT 1 
+                    FROM pg_indexes 
+                    WHERE tablename = 'account' 
+                    AND indexname = 'ix_account'
+                ) THEN TRUE
+                ELSE FALSE
+            END AS index_exists;
+        
+2025-02-21 22:14:12,372 - INFO - Ran SQL query 32
+2025-02-21 22:14:12,372 - INFO - Cleaning up SQL 32: DROP TABLE purchase;
+2025-02-21 22:14:12,372 - INFO - Successfully cleaned up SQL 32
+2025-02-21 22:14:12,372 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_32_output.csv
+2025-02-21 22:14:12,372 - INFO - Processing SQL 33: 
+CREATE TABLE card_info (
+    cardid VARCHAR(50),
+    company VARCHAR(10),
+    type CHAR(1)
+);
+
+INSERT INTO card_info (cardid, company, type) VALUES
+('1234-5678-HIJK', '1234', 'A'),
+('1234-9012-HIJK', '1234', 'B'),
+('56457-12456-DF-GH-TC', '56457', 'D');
+
+2025-02-21 22:14:12,373 - INFO - Successfully preprocessed SQL 33
+2025-02-21 22:14:12,373 - INFO - Running SQL 33: 
+        select posttypeid,
+        sum(case when tags like '%bayesian%'
+                or tags like '%distributions%'
+            then 1 else 0 end) as keyword_count
+        from posts
+        group by posttypeid
+        
+2025-02-21 22:14:12,400 - INFO - Ran SQL query 33
+2025-02-21 22:14:12,400 - INFO - Cleaning up SQL 33: DROP TABLE card_info;
+2025-02-21 22:14:12,400 - INFO - Successfully cleaned up SQL 33
+2025-02-21 22:14:12,400 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_33_output.csv
+2025-02-21 22:14:12,400 - INFO - Processing SQL 34: 
+2025-02-21 22:14:12,400 - INFO - Running SQL 34: SELECT
+    c.id,
+    c.text,
+    (
+        SELECT array_agg(matches[1])
+        FROM regexp_matches(
+            c.text,
+            '(\{[^{}]*\})',
+            'g'
+        ) AS matches
+    ) AS bracketed_tokens
+FROM cards AS c;
+2025-02-21 22:14:12,598 - INFO - Ran SQL query 34
+2025-02-21 22:14:12,598 - INFO - Cleaning up SQL 34: 
+2025-02-21 22:14:12,703 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_34_output.csv
+2025-02-21 22:14:12,706 - INFO - Processing SQL 35: ALTER TABLE users ALTER COLUMN Age SET DATA TYPE text; INSERT INTO users VALUES (1212121,3150,'2010-07-19 19:09:39','JMS','2014-09-13 04:03:25',NULL,NULL,NULL,257,138,7,134002,'Invalid Age',NULL);
+2025-02-21 22:14:12,763 - INFO - Successfully preprocessed SQL 35
+2025-02-21 22:14:12,763 - INFO - Running SQL 35: WITH ranked_races AS (SELECT gender_id, race_id, COUNT(*) AS count, DENSE_RANK() OVER (PARTITION BY gender_id ORDER BY COUNT(*) DESC) AS rank FROM superhero GROUP BY gender_id, race_id) SELECT gender_id, race_id, count FROM ranked_races WHERE rank <= 5;
+2025-02-21 22:14:12,763 - INFO - Ran SQL query 35
+2025-02-21 22:14:12,763 - INFO - Cleaning up SQL 35: DELETE FROM users WHERE id = 1212121; ALTER TABLE users ALTER COLUMN age SET DATA TYPE integer USING age::integer;
+2025-02-21 22:14:12,942 - INFO - Successfully cleaned up SQL 35
+2025-02-21 22:14:12,942 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_35_output.csv
+2025-02-21 22:14:12,942 - INFO - Processing SQL 36: DROP TABLE IF EXISTS profiles; CREATE TABLE profiles (id varchar(256) NOT NULL, CreationDate text, WebsiteUrl text, PRIMARY KEY (id));
+2025-02-21 22:14:12,944 - INFO - Successfully preprocessed SQL 36
+2025-02-21 22:14:12,944 - INFO - Running SQL 36: SELECT r.* FROM unnest(ARRAY['6d268c95-c176-5766-9a46-c14f739aba1c', '56f4935b-f6c5-59b9-88bf-9bcce20247ce', '8dfc67e9-8323-5d1f-9e25-9f9394abd5a0', '5ac794d2-4c66-5332-afb1-54b24bc11823', '60f49caf-3583-5f85-b4b3-08dca73a8628']::uuid[]) AS p(uuid) CROSS JOIN LATERAL (SELECT id, date, text, uuid FROM rulings r WHERE r.uuid = p.uuid::varchar ORDER BY date DESC LIMIT 3) r ORDER BY uuid, date DESC;
+2025-02-21 22:14:13,021 - INFO - Ran SQL query 36
+2025-02-21 22:14:13,021 - INFO - No clean up SQL for 36
+2025-02-21 22:14:13,021 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_36_output.csv
+2025-02-21 22:14:13,021 - INFO - No preprocess SQL for 37
+2025-02-21 22:14:13,021 - INFO - Running SQL 37: SELECT s.cds, s.cds IN (SELECT cdscode FROM frpm) AS frpm_exists FROM satscores s order by cds
+2025-02-21 22:14:13,025 - INFO - Ran SQL query 37
+2025-02-21 22:14:13,025 - INFO - No clean up SQL for 37
+2025-02-21 22:14:13,025 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_37_output.csv
+2025-02-21 22:14:13,026 - INFO - No preprocess SQL for 38
+2025-02-21 22:14:13,026 - INFO - Running SQL 38: SELECT id, ((gk_diving + gk_handling + gk_kicking + gk_positioning + gk_reflexes) - GREATEST(gk_diving, gk_handling, gk_kicking, gk_positioning, gk_reflexes) - LEAST(gk_diving, gk_handling, gk_kicking, gk_positioning, gk_reflexes)) / 3.0 AS adjusted_average FROM player_attributes ORDER BY id;
+2025-02-21 22:14:13,230 - INFO - Ran SQL query 38
+2025-02-21 22:14:13,230 - INFO - No clean up SQL for 38
+2025-02-21 22:14:13,317 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_38_output.csv
+2025-02-21 22:14:13,322 - INFO - Processing SQL 39: CREATE TABLE failure (event VARCHAR(255) NOT NULL, member VARCHAR(255) NOT NULL, PRIMARY KEY (event, member));
+2025-02-21 22:14:13,324 - INFO - Successfully preprocessed SQL 39
+2025-02-21 22:14:13,324 - INFO - Running SQL 39: 
+        select account_id, date, 
+        sum(amount) OVER w as total_amount, 
+        sum(balance) OVER w as total_balance, 
+        count(trans_id) OVER w as total_transactions
+        from trans WINDOW w AS (PARTITION BY account_id, date);
+        
+2025-02-21 22:14:15,343 - INFO - Ran SQL query 39
+2025-02-21 22:14:15,343 - INFO - Cleaning up SQL 39: DROP TABLE IF EXISTS failure;
+2025-02-21 22:14:15,347 - INFO - Successfully cleaned up SQL 39
+2025-02-21 22:14:16,282 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_39_output.csv
+2025-02-21 22:14:16,332 - INFO - Processing SQL 40: CREATE TABLE player_audits (player_id int, old_player_name text, changed_on timestamp );
+2025-02-21 22:14:16,334 - INFO - Successfully preprocessed SQL 40
+2025-02-21 22:14:16,334 - INFO - Running SQL 40: 
+        SELECT * FROM transactions_1k WHERE Date < '2012-08-24' OR (Date = '2012-08-24' AND Time > '10:00:00') OR (Date = '2012-08-24' AND Time = '10:00:00' AND Amount < 20);
+        
+2025-02-21 22:14:16,335 - INFO - Ran SQL query 40
+2025-02-21 22:14:16,335 - INFO - Cleaning up SQL 40: DROP TABLE IF EXISTS player_audits;
+2025-02-21 22:14:16,335 - INFO - Successfully cleaned up SQL 40
+2025-02-21 22:14:16,336 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_40_output.csv
+2025-02-21 22:14:16,336 - INFO - Processing SQL 41: 
+CREATE TABLE event_attendance (MemberID int, EventID int, EventType text, AttendanceDate date); INSERT INTO event_attendance (MemberID, EventID, EventType, AttendanceDate) VALUES (1, 101, 'Game', '2023-01-01'), (1, 102, 'Game', '2023-01-10'), (1, 103, 'Game', '2023-02-15'), (1, 104, 'Game', '2023-02-20'), (1, 105, 'Workshop', '2023-03-01'), (1, 106, 'Workshop', '2023-03-20'), (2, 107, 'Game', '2023-01-15'), (2, 108, 'Workshop', '2023-02-06');
+
+2025-02-21 22:14:16,337 - INFO - Successfully preprocessed SQL 41
+2025-02-21 22:14:16,337 - INFO - Running SQL 41: 
+        SELECT client.gender, loan.amount, loan.duration, account.date FROM loan JOIN account ON loan.account_id = account.account_id JOIN disp ON account.account_id = disp.account_id JOIN client ON disp.client_id = client.client_id WHERE loan.date BETWEEN '1996-01-01' AND '1996-12-31';
+        
+2025-02-21 22:14:16,339 - INFO - Ran SQL query 41
+2025-02-21 22:14:16,339 - INFO - Cleaning up SQL 41: DROP TABLE event_attendance;
+2025-02-21 22:14:16,339 - INFO - Successfully cleaned up SQL 41
+2025-02-21 22:14:16,339 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_41_output.csv
+2025-02-21 22:14:16,339 - INFO - Processing SQL 42: 
+CREATE TABLE preference_tag (
+    userid INT PRIMARY KEY,
+    tag TEXT[]
+);
+
+INSERT INTO preference_tag (userid, tag) VALUES
+(1, ARRAY['friend', 'apple', 'cat']),
+(2, ARRAY['cat', 'friend', 'dog']),
+(3, ARRAY['pasta', 'best-friend', 'lizard']),
+(4, ARRAY['wildcat', 'potato', 'alices-friend']);
+
+
+2025-02-21 22:14:16,341 - INFO - Successfully preprocessed SQL 42
+2025-02-21 22:14:16,341 - INFO - Running SQL 42: WITH deleted_rows AS (DELETE FROM superhero WHERE id = 999 RETURNING 1) SELECT COALESCE((SELECT * FROM deleted_rows), 0)
+2025-02-21 22:14:16,341 - INFO - Ran SQL query 42
+2025-02-21 22:14:16,342 - INFO - Cleaning up SQL 42: DROP TABLE preference_tag;
+2025-02-21 22:14:16,342 - INFO - Successfully cleaned up SQL 42
+2025-02-21 22:14:16,342 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_42_output.csv
+2025-02-21 22:14:16,342 - INFO - Processing SQL 43: CREATE TABLE IF NOT EXISTS account_info (account_id INTEGER, condition JSONB);
+2025-02-21 22:14:16,343 - INFO - Successfully preprocessed SQL 43
+2025-02-21 22:14:16,343 - INFO - Processing SQL 43: INSERT INTO account_info (account_id, condition) VALUES (1, '[{"action":"read","subject":"rootcompany","conditions":{"rootcompanyid":{"$in":[35,20,5,6]}}}]'::jsonb), (2, '[{"action":"read","subject":"rootcompany","conditions":{"rootcompanyid":{"$in":[1,4,2,3,6]}}}]'::jsonb), (3, '[{"action":"read","subject":"rootcompany","conditions":{"rootcompanyid":{"$in":[5]}}}]'::jsonb);
+2025-02-21 22:14:16,343 - INFO - Successfully preprocessed SQL 43
+2025-02-21 22:14:16,343 - INFO - Running SQL 43: SELECT name, convertedManaCost, ROUND(avg(convertedManaCost::numeric) OVER(ORDER BY id ROWS BETWEEN 8 PRECEDING AND CURRENT ROW), 2) AS nine_card_avg FROM cards WHERE name LIKE 'A%' ORDER BY id DESC
+2025-02-21 22:14:16,372 - INFO - Ran SQL query 43
+2025-02-21 22:14:16,372 - INFO - Cleaning up SQL 43: DROP TABLE IF EXISTS account_info;
+2025-02-21 22:14:16,372 - INFO - Successfully cleaned up SQL 43
+2025-02-21 22:14:16,374 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_43_output.csv
+2025-02-21 22:14:16,374 - INFO - Processing SQL 44: ALTER TABLE hero_power ADD COLUMN active BOOLEAN DEFAULT TRUE;
+2025-02-21 22:14:16,375 - INFO - Successfully preprocessed SQL 44
+2025-02-21 22:14:16,375 - INFO - Running SQL 44: SELECT * FROM trans WHERE EXTRACT(MONTH FROM date) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(DAY FROM date) = EXTRACT(DAY FROM CURRENT_DATE) ORDER BY date DESC;
+2025-02-21 22:14:16,456 - INFO - Ran SQL query 44
+2025-02-21 22:14:16,456 - INFO - Cleaning up SQL 44: ALTER TABLE hero_power DROP COLUMN IF EXISTS active;
+2025-02-21 22:14:16,456 - INFO - Successfully cleaned up SQL 44
+2025-02-21 22:14:16,456 - INFO - Cleaning up SQL 44: DROP INDEX IF EXISTS idx_hero_power_active;
+2025-02-21 22:14:16,457 - INFO - Successfully cleaned up SQL 44
+2025-02-21 22:14:16,457 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_44_output.csv
+2025-02-21 22:14:16,457 - INFO - Processing SQL 45: CREATE TABLE orders (user_id INT, email TEXT, segment TEXT, destination TEXT, revenue NUMERIC); INSERT INTO orders (user_id, email, segment, destination, revenue) VALUES (1, 'joe@smith.com', 'basic', 'New York', 500), (1, 'joe@smith.com', 'luxury', 'London', 750), (1, 'joe@smith.com', 'luxury', 'London', 500), (1, 'joe@smith.com', 'basic', 'New York', 625), (1, 'joe@smith.com', 'basic', 'Miami', 925), (1, 'joe@smith.com', 'basic', 'Los Angeles', 218), (1, 'joe@smith.com', 'basic', 'Sydney', 200), (2, 'mary@jones.com', 'basic', 'Chicago', 375), (2, 'mary@jones.com', 'luxury', 'New York', 1500), (2, 'mary@jones.com', 'basic', 'Toronto', 2800), (2, 'mary@jones.com', 'basic', 'Miami', 750), (2, 'mary@jones.com', 'basic', 'New York', 500), (2, 'mary@jones.com', 'basic', 'New York', 625), (3, 'mike@me.com', 'luxury', 'New York', 650), (3, 'mike@me.com', 'basic', 'New York', 875), (4, 'sally@you.com', 'luxury', 'Chicago', 1300), (4, 'sally@you.com', 'basic', 'New York', 1200), (4, 'sally@you.com', 'basic', 'New York', 1000), (4, 'sally@you.com', 'luxury', 'Sydney', 725), (5, 'bob@gmail.com', 'basic', 'London', 500), (5, 'bob@gmail.com', 'luxury', 'London', 750);
+2025-02-21 22:14:16,459 - INFO - Successfully preprocessed SQL 45
+2025-02-21 22:14:16,459 - INFO - Running SQL 45: 
+SELECT resultId FROM results WHERE fastestLapTime = '1:35.405';
+
+2025-02-21 22:14:16,461 - INFO - Ran SQL query 45
+2025-02-21 22:14:16,461 - INFO - Cleaning up SQL 45: DROP TABLE orders;
+2025-02-21 22:14:16,462 - INFO - Successfully cleaned up SQL 45
+2025-02-21 22:14:16,462 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_45_output.csv
+2025-02-21 22:14:16,462 - INFO - Processing SQL 46: CREATE TABLE cars (version varchar(100))
+2025-02-21 22:14:16,462 - INFO - Successfully preprocessed SQL 46
+2025-02-21 22:14:16,462 - INFO - Processing SQL 46: INSERT INTO cars (version) VALUES ('3.0.5-1-test-dev'), ('3.0.6-1'), ('3.0.7-1-test'), ('3.0.8-1-test-dev-test23'), ('3.0.9-1'), ('3.0.13-2'), ('3.0.4-1-1'), ('3.0.10-1'), ('3.0.11-2'), ('3.0.11-1')
+2025-02-21 22:14:16,462 - INFO - Successfully preprocessed SQL 46
+2025-02-21 22:14:16,462 - INFO - Running SQL 46: 
+SELECT raceId,
+       jsonb_object_agg(COALESCE(position::text, 'Unknown') , COALESCE(cnt::text, '0')) AS json_count
+FROM (
+    SELECT raceId,
+           position,
+           COUNT(*) AS cnt
+    FROM results
+    GROUP BY raceId, position
+) AS aggregated_counts
+GROUP BY raceId
+
+2025-02-21 22:14:16,484 - INFO - Ran SQL query 46
+2025-02-21 22:14:16,484 - INFO - Cleaning up SQL 46: DROP TABLE cars;
+2025-02-21 22:14:16,484 - INFO - Successfully cleaned up SQL 46
+2025-02-21 22:14:16,487 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_46_output.csv
+2025-02-21 22:14:16,487 - INFO - Processing SQL 47: CREATE TABLE patients ( patient_id SERIAL PRIMARY KEY, patient_name TEXT NOT NULL );
+2025-02-21 22:14:16,489 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,489 - INFO - Processing SQL 47: CREATE TABLE medications ( medication_id SERIAL PRIMARY KEY, medication_name TEXT NOT NULL );
+2025-02-21 22:14:16,491 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,491 - INFO - Processing SQL 47: CREATE TABLE prescriptions ( patient_id INT REFERENCES patients (patient_id), medication_id INT REFERENCES medications (medication_id), PRIMARY KEY (patient_id, medication_id) );
+2025-02-21 22:14:16,492 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,492 - INFO - Processing SQL 47: INSERT INTO patients (patient_name) VALUES ('Alice'), ('Bob'), ('Charlie');
+2025-02-21 22:14:16,492 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,492 - INFO - Processing SQL 47: INSERT INTO medications (medication_name) VALUES ('Aspirin'), ('Ibuprofen'), ('Paracetamol'), ('Warfarin');
+2025-02-21 22:14:16,493 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,493 - INFO - Processing SQL 47: INSERT INTO prescriptions (patient_id, medication_id) VALUES (1, 1), (1, 2), (1, 3);
+2025-02-21 22:14:16,493 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,493 - INFO - Processing SQL 47: INSERT INTO prescriptions (patient_id, medication_id) VALUES (2, 2);
+2025-02-21 22:14:16,493 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,493 - INFO - Processing SQL 47: INSERT INTO prescriptions (patient_id, medication_id) VALUES (3, 2), (3, 1), (3, 3), (3, 4);
+2025-02-21 22:14:16,493 - INFO - Successfully preprocessed SQL 47
+2025-02-21 22:14:16,493 - INFO - Running SQL 47: 
+SELECT * FROM Match WHERE (match_api_id, date, id) < (492473, '2008-08-17 00:00:00', 1) ORDER BY match_api_id DESC, date DESC, id DESC LIMIT 3;
+
+2025-02-21 22:14:16,494 - INFO - Ran SQL query 47
+2025-02-21 22:14:16,494 - INFO - No clean up SQL for 47
+2025-02-21 22:14:16,494 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_47_output.csv
+2025-02-21 22:14:16,494 - INFO - Processing SQL 48: 
+2025-02-21 22:14:16,498 - INFO - Running SQL 48: 
+SELECT s.School FROM schools s WHERE s.County IN ('Alameda', 'Contra Costa') 
+GROUP BY s.School HAVING COUNT(DISTINCT s.County) = 2;
+
+2025-02-21 22:14:16,503 - INFO - Ran SQL query 48
+2025-02-21 22:14:16,503 - INFO - Cleaning up SQL 48: 
+2025-02-21 22:14:16,503 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_48_output.csv
+2025-02-21 22:14:16,503 - INFO - Processing SQL 49: 
+2025-02-21 22:14:16,503 - INFO - Running SQL 49: SELECT DISTINCT ON (name) raceid, name, date FROM races ORDER BY name, date DESC;
+2025-02-21 22:14:16,504 - INFO - Ran SQL query 49
+2025-02-21 22:14:16,504 - INFO - Cleaning up SQL 49: 
+2025-02-21 22:14:16,504 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_49_output.csv
+2025-02-21 22:14:16,504 - INFO - Processing SQL 50: 
+2025-02-21 22:14:16,504 - INFO - Running SQL 50: SELECT t.team_name, o.outcome FROM (VALUES('Team A'),('Team B')) AS t(team_name) CROSS JOIN (VALUES('win'),('lose'),('draw')) AS o(outcome);
+2025-02-21 22:14:16,504 - INFO - Ran SQL query 50
+2025-02-21 22:14:16,504 - INFO - Cleaning up SQL 50: 
+2025-02-21 22:14:16,504 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_50_output.csv
+2025-02-21 22:14:16,504 - INFO - Processing SQL 51: 
+2025-02-21 22:14:16,504 - INFO - Running SQL 51: 
+WITH RankedFRPM AS (
+    SELECT *, 
+           ROW_NUMBER() OVER (
+               PARTITION BY "County Code" 
+               ORDER BY "Enrollment (K-12)" DESC NULLS LAST
+           ) AS rn 
+    FROM frpm
+    WHERE "County Code" IS NOT NULL AND "Enrollment (K-12)" IS NOT NULL
+) 
+SELECT * 
+FROM RankedFRPM 
+WHERE rn = 2;
+
+2025-02-21 22:14:16,525 - INFO - Ran SQL query 51
+2025-02-21 22:14:16,525 - INFO - Cleaning up SQL 51: 
+2025-02-21 22:14:16,525 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_51_output.csv
+2025-02-21 22:14:16,525 - INFO - Processing SQL 52: 
+2025-02-21 22:14:16,525 - INFO - Running SQL 52: SELECT d.forename, d.surname, r.race_results
+FROM (
+   SELECT driverid, 
+          jsonb_agg(jsonb_build_object('laps', r.laps, 'position', r.position)) AS race_results
+   FROM results r
+   WHERE EXISTS (
+      SELECT 1 
+      FROM results r1
+      WHERE r1.driverid = r.driverid
+      AND   r1.laps = 56
+      AND   r1.position = 1
+   )
+   GROUP BY driverid
+) r
+JOIN drivers d ON d.driverid = r.driverid;
+2025-02-21 22:14:16,534 - INFO - Ran SQL query 52
+2025-02-21 22:14:16,534 - INFO - Cleaning up SQL 52: 
+2025-02-21 22:14:16,536 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_52_output.csv
+2025-02-21 22:14:16,536 - INFO - Processing SQL 53: 
+2025-02-21 22:14:16,536 - INFO - Running SQL 53: SELECT DISTINCT id, acceptedanswerid, posttypeid, score
+FROM (
+  SELECT p.*
+  FROM posts p
+  JOIN posts c ON p.acceptedanswerid = c.id
+  WHERE p.score >= 20
+  UNION ALL
+  SELECT c.*
+  FROM posts p
+  JOIN posts c ON p.acceptedanswerid = c.id
+  WHERE NOT p.score >= 20 AND c.score >= 20
+) x;
+2025-02-21 22:14:16,574 - INFO - Ran SQL query 53
+2025-02-21 22:14:16,574 - INFO - Cleaning up SQL 53: 
+2025-02-21 22:14:16,574 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_53_output.csv
+2025-02-21 22:14:16,574 - INFO - Processing SQL 54: 
+2025-02-21 22:14:16,574 - INFO - Running SQL 54: SELECT DISTINCT s.id 
+FROM superhero s 
+WHERE s.id IN (
+    SELECT hero_id 
+    FROM hero_power 
+    WHERE power_id = (
+        SELECT id 
+        FROM superpower 
+        WHERE power_name = 'Flight'
+    )
+) 
+AND s.id IN (
+    SELECT hero_id 
+    FROM hero_power 
+    WHERE power_id = (
+        SELECT id 
+        FROM superpower 
+        WHERE power_name = 'Telepathy'
+    )
+) 
+AND s.id NOT IN (
+    SELECT hero_id 
+    FROM hero_power 
+    WHERE power_id NOT IN (
+        (SELECT id FROM superpower WHERE power_name = 'Flight'), 
+        (SELECT id FROM superpower WHERE power_name = 'Telepathy')
+    )
+);
+2025-02-21 22:14:16,578 - INFO - Ran SQL query 54
+2025-02-21 22:14:16,578 - INFO - Cleaning up SQL 54: 
+2025-02-21 22:14:16,578 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_54_output.csv
+2025-02-21 22:14:16,578 - INFO - Processing SQL 55: CREATE TABLE clients (id INT NOT NULL);
+2025-02-21 22:14:16,579 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,579 - INFO - Processing SQL 55: CREATE TABLE groups (id INT NOT NULL);
+2025-02-21 22:14:16,579 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,579 - INFO - Processing SQL 55: CREATE TABLE clients_to_groups (id serial, group_id INT, client_id INT);
+2025-02-21 22:14:16,579 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,579 - INFO - Processing SQL 55: INSERT INTO clients(id) VALUES (0), (1), (2), (3);
+2025-02-21 22:14:16,579 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,579 - INFO - Processing SQL 55: INSERT INTO groups(id) VALUES (1), (3), (5), (6);
+2025-02-21 22:14:16,579 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,580 - INFO - Processing SQL 55: INSERT INTO clients_to_groups(client_id, group_id) VALUES (0, 1), (0, 5), (1, 1), (1, 90), (2, 1), (3, 3), (3, 5), (3, 90);
+2025-02-21 22:14:16,580 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,580 - INFO - Processing SQL 55: INSERT INTO clients (id) SELECT random() from generate_series(1,2000);
+2025-02-21 22:14:16,581 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,581 - INFO - Processing SQL 55: INSERT INTO clients_to_groups(client_id, group_id) SELECT random(), random() from generate_series(1,2000);
+2025-02-21 22:14:16,582 - INFO - Successfully preprocessed SQL 55
+2025-02-21 22:14:16,582 - INFO - Running SQL 55: SELECT to_timestamp(percentile_cont(0.5) within group (ORDER by cast (extract(epoch from releasedate) as integer)))::date FROM sets
+2025-02-21 22:14:16,583 - INFO - Ran SQL query 55
+2025-02-21 22:14:16,583 - INFO - Cleaning up SQL 55: DROP TABLE clients;
+2025-02-21 22:14:16,583 - INFO - Successfully cleaned up SQL 55
+2025-02-21 22:14:16,583 - INFO - Cleaning up SQL 55: DROP TABLE groups;
+2025-02-21 22:14:16,583 - INFO - Successfully cleaned up SQL 55
+2025-02-21 22:14:16,583 - INFO - Cleaning up SQL 55: DROP TABLE clients_to_groups;
+2025-02-21 22:14:16,583 - INFO - Successfully cleaned up SQL 55
+2025-02-21 22:14:16,584 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_55_output.csv
+2025-02-21 22:14:16,584 - INFO - Processing SQL 56: CREATE TABLE club_transactions (transaction_date DATE, club_name VARCHAR(50), amount INTEGER);
+2025-02-21 22:14:16,584 - INFO - Successfully preprocessed SQL 56
+2025-02-21 22:14:16,584 - INFO - Processing SQL 56: INSERT INTO club_transactions (transaction_date, club_name, amount) VALUES ('2023-01-01', 'Manchester United', 3), ('2023-01-02', 'Manchester United', 2), ('2023-01-03', 'Manchester United', 1), ('2023-01-04', 'Manchester United', -5), ('2023-01-05', 'Manchester United', 1), ('2023-01-01', 'Liverpool', 2), ('2023-01-02', 'Liverpool', -1), ('2023-01-03', 'Liverpool', -6);
+2025-02-21 22:14:16,584 - INFO - Successfully preprocessed SQL 56
+2025-02-21 22:14:16,584 - INFO - Running SQL 56: WITH RECURSIVE recuree AS (SELECT id AS league_id, name FROM League UNION ALL SELECT L.id AS league_id, L.name FROM League L JOIN recuree R ON L.id = R.league_id) SELECT * FROM recuree LIMIT 50;
+2025-02-21 22:14:16,584 - INFO - Ran SQL query 56
+2025-02-21 22:14:16,584 - INFO - Cleaning up SQL 56: DROP TABLE club_transactions;
+2025-02-21 22:14:16,584 - INFO - Successfully cleaned up SQL 56
+2025-02-21 22:14:16,585 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_56_output.csv
+2025-02-21 22:14:16,585 - INFO - Processing SQL 57: create table modules (id_module int, id_parent_module int, module_code text, name_module text, desc_module text);
+2025-02-21 22:14:16,586 - INFO - Successfully preprocessed SQL 57
+2025-02-21 22:14:16,586 - INFO - Processing SQL 57: insert into modules values (1, null, '001', 'A', 'A'), (2, 1, '011.002', 'B', 'B'), (3, 1, '232', 'C', 'C'), (4, 1, 'asdf', 'asdf', 'asdf'), (5, null, 'asdf', 'asdf', 'asdf'), (14, 5, 'asdf', 'asdf', 'asdf'), (6, null, '23', 'asdf', 'qw'), (7, 6, 'asdf', 'asdf', 'asdf'), (8, 6, 'asdf', 'asdf', 'asdf'), (22, 6, 'asdf', 'asdf', 'asdf'), (9, null, 'asdf', 'asdf', 'asdfsad'), (20, 9, 'asdf', 'asdf', 'asdf'), (21, 9, 'asdf', 'asdf', 'asdf'), (10, null, 'asdf', 'asdf', 'asdf'), (11, 10, 'sadf', 'asdf', 'asdf'), (12, 10, 'asdf', 'asdf', 'asdfsf'), (13, 10, 'asdf', 'asdf', 'asdf');
+2025-02-21 22:14:16,586 - INFO - Successfully preprocessed SQL 57
+2025-02-21 22:14:16,586 - INFO - Running SQL 57: SELECT r.name, r.date, ARRAY_AGG(lt.milliseconds ORDER BY lt.lap) AS lap_times FROM lapTimes lt JOIN races r ON lt.raceId = r.raceId WHERE lt.driverId = 1 GROUP BY r.name, r.date ORDER BY r.date
+2025-02-21 22:14:16,610 - INFO - Ran SQL query 57
+2025-02-21 22:14:16,610 - INFO - Cleaning up SQL 57: DROP TABLE modules;
+2025-02-21 22:14:16,610 - INFO - Successfully cleaned up SQL 57
+2025-02-21 22:14:16,612 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_57_output.csv
+2025-02-21 22:14:16,612 - INFO - Processing SQL 58: CREATE TABLE atom_edits (edit_id SERIAL PRIMARY KEY, atom_id TEXT, element TEXT, molecule_id TEXT); INSERT INTO atom_edits (atom_id, element, molecule_id) VALUES ('TR000_1', 'cl', NULL), ('TR000_1', NULL, 'TR001'), ('TR000_2', 'c', NULL);
+2025-02-21 22:14:16,614 - INFO - Successfully preprocessed SQL 58
+2025-02-21 22:14:16,614 - INFO - Running SQL 58: WITH LatestLabs AS (SELECT ID, "Examination Date", Thrombosis, ROW_NUMBER() OVER (PARTITION BY ID ORDER BY "Examination Date" DESC) AS rn FROM Examination) SELECT ID, MAX(CASE WHEN rn = 1 THEN Thrombosis END) AS Thrombosis_1, MAX(CASE WHEN rn = 2 THEN Thrombosis END) AS Thrombosis_2 FROM LatestLabs WHERE rn <= 2 GROUP BY ID
+2025-02-21 22:14:16,614 - INFO - Ran SQL query 58
+2025-02-21 22:14:16,614 - INFO - Cleaning up SQL 58: DROP TABLE atom_edits;
+2025-02-21 22:14:16,615 - INFO - Successfully cleaned up SQL 58
+2025-02-21 22:14:16,615 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_58_output.csv
+2025-02-21 22:14:16,615 - INFO - Processing SQL 59: ALTER TABLE customers
+ADD CONSTRAINT customers_customerid_segment_currency_uk
+UNIQUE (customerid, segment, currency);
+2025-02-21 22:14:16,623 - INFO - Successfully preprocessed SQL 59
+2025-02-21 22:14:16,623 - INFO - Running SQL 59: with connections as ( select atom_id as atom from connected union all select atom_id2 as atom from connected ) select atom as id, count(*) as num from connections group by atom having count(*) = (select max(cnt) from (select count(*) as cnt from connections group by atom) as max_connections);
+2025-02-21 22:14:16,643 - INFO - Ran SQL query 59
+2025-02-21 22:14:16,643 - INFO - Cleaning up SQL 59: DROP TABLE customers;
+2025-02-21 22:14:16,643 - INFO - Successfully cleaned up SQL 59
+2025-02-21 22:14:16,644 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_59_output.csv
+2025-02-21 22:14:16,644 - INFO - Processing SQL 60: ALTER TABLE disp 
+ADD COLUMN addresses jsonb;
+2025-02-21 22:14:16,644 - INFO - Successfully preprocessed SQL 60
+2025-02-21 22:14:16,644 - INFO - Processing SQL 60: INSERT INTO disp (disp_id, client_id, account_id, addresses) VALUES
+    (324124, 32323432, 4342443141, '[{"PostCode":"12345"}]'),
+    (43244241, 3455566, 645634, '[null]'),
+    (42342436, 12345, 5346574, 'null');
+2025-02-21 22:14:16,645 - INFO - Running SQL 60: SELECT raceId, name, year, COUNT(*) OVER (PARTITION BY year) as same_year_races FROM races;
+2025-02-21 22:14:16,646 - INFO - Ran SQL query 60
+2025-02-21 22:14:16,646 - INFO - Cleaning up SQL 60: 
+    DELETE FROM disp 
+    WHERE disp_id IN (324124, 43244241, 42342436);
+    
+2025-02-21 22:14:16,646 - INFO - Successfully cleaned up SQL 60
+2025-02-21 22:14:16,646 - INFO - Cleaning up SQL 60: 
+    ALTER TABLE disp 
+    DROP COLUMN addresses;
+    
+2025-02-21 22:14:16,647 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_60_output.csv
+2025-02-21 22:14:16,647 - INFO - Processing SQL 61: CREATE TABLE IF NOT EXISTS loan (loan_id SERIAL PRIMARY KEY, account_id int NOT NULL, date date NOT NULL, amount int NOT NULL, duration int NOT NULL, payments double NOT NULL, status text NOT NULL, UNIQUE(account_id, date)); INSERT INTO loan (loan_id, account_id, date, amount, duration, payments, status) VALUES (134411, 2, '1994-01-05', 80952, 24, 3373.0, 'A');
+2025-02-21 22:14:16,647 - INFO - Processing SQL 61: 
+    DELETE FROM loan t1
+    USING loan t2
+    WHERE t1.account_id = t2.account_id
+      AND t1.date = t2.date
+      AND t1.loan_id > t2.loan_id;
+    
+2025-02-21 22:14:16,647 - INFO - Successfully preprocessed SQL 61
+2025-02-21 22:14:16,647 - INFO - Processing SQL 61: ALTER TABLE loan
+    ADD CONSTRAINT loan_accountid_date_uk
+    UNIQUE (account_id, date);
+2025-02-21 22:14:16,648 - INFO - Successfully preprocessed SQL 61
+2025-02-21 22:14:16,648 - INFO - Running SQL 61: with hero_attribute_data (hero_id, attribute_id, max_score, year_1, year_2, year_3, year_4, year_5) as (values (1, 1, 80, 80, 80, 80, null, 80), (2, 2, 90, 90, 85, 90, 88, 90), (3, 3, 75, 75, 70, null, 75, 75), (4, 4, 60, null, 60, 60, 60, null)), score_check as (select *, case when (coalesce(year_1::character, 'x') || coalesce(year_2::character, 'x') || coalesce(year_3::character, 'x') || coalesce(year_4::character, 'x') || coalesce(year_5::character, 'x') ~ '\d+x\d+' or year_1 <> max_score or year_2 <> max_score or year_3 <> max_score or year_4 <> max_score or year_5 <> max_score) then false else true end is_a_match from hero_attribute_data) select * from score_check where is_a_match is false;
+2025-02-21 22:14:16,649 - INFO - Ran SQL query 61
+2025-02-21 22:14:16,649 - INFO - Cleaning up SQL 61: DROP TABLE IF EXISTS loan;
+2025-02-21 22:14:16,649 - INFO - Successfully cleaned up SQL 61
+2025-02-21 22:14:16,649 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_61_output.csv
+2025-02-21 22:14:16,649 - INFO - Processing SQL 62: 
+CREATE TABLE norm1 AS SELECT uuid, setCode, rarity, manaCost FROM cards WHERE id % 2 = 0; CREATE TABLE norm2 AS SELECT uuid, setCode, rarity, manaCost FROM cards WHERE id % 3 = 0;
+
+2025-02-21 22:14:16,713 - INFO - Successfully preprocessed SQL 62
+2025-02-21 22:14:16,713 - INFO - Running SQL 62: WITH norm_matches AS ( SELECT id AS match_id, home_team_api_id AS team_id, home_team_goal AS goals, CASE WHEN home_team_goal > away_team_goal THEN 'W' WHEN home_team_goal = away_team_goal THEN 'D' WHEN home_team_goal < away_team_goal THEN 'L' END AS outcome FROM match UNION ALL SELECT id AS match_id, away_team_api_id AS team_id, away_team_goal AS goals, CASE WHEN home_team_goal > away_team_goal THEN 'L' WHEN home_team_goal = away_team_goal THEN 'D' WHEN home_team_goal < away_team_goal THEN 'W' END AS outcome FROM match ), points (outcome, value) AS ( VALUES ('W', 3), ('D', 1), ('L', 0) ) SELECT t.team_long_name, count(1) AS matches, count(1) filter (WHERE m.outcome = 'W') AS victories, count(1) filter (WHERE m.outcome = 'L') AS defeats, count(1) filter (WHERE m.outcome = 'D') AS draws, sum(p.value) AS score FROM team t JOIN norm_matches m ON m.team_id = t.team_api_id JOIN points p ON p.outcome = m.outcome GROUP BY t.team_long_name ORDER BY t.team_long_name
+2025-02-21 22:14:16,773 - INFO - Ran SQL query 62
+2025-02-21 22:14:16,773 - INFO - Cleaning up SQL 62: 
+DROP TABLE norm1; DROP TABLE norm2;
+
+2025-02-21 22:14:16,774 - INFO - Successfully cleaned up SQL 62
+2025-02-21 22:14:16,774 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_62_output.csv
+2025-02-21 22:14:16,774 - INFO - Processing SQL 63: CREATE OR REPLACE FUNCTION gap_fill_internal(s anyelement, v anyelement) RETURNS anyelement LANGUAGE plpgsql AS $func$ BEGIN RETURN COALESCE(v, s); END $func$; CREATE AGGREGATE gap_fill(anyelement) ( SFUNC = gap_fill_internal, STYPE = anyelement );
+2025-02-21 22:14:16,774 - INFO - Successfully preprocessed SQL 63
+2025-02-21 22:14:16,774 - INFO - Running SQL 63: SELECT id, COALESCE(MAX(CASE WHEN diagnosis = 'SLE' THEN 'TRUE' END), 'FALSE') AS SLE, COALESCE(MAX(CASE WHEN diagnosis = 'PSS' THEN 'TRUE' END), 'FALSE') AS PSS, COALESCE(MAX(CASE WHEN diagnosis = 'RA susp.' THEN 'TRUE' END), 'FALSE') AS RA_susp FROM examination GROUP BY id
+2025-02-21 22:14:16,775 - INFO - Ran SQL query 63
+2025-02-21 22:14:16,775 - INFO - Cleaning up SQL 63: 
+2025-02-21 22:14:16,775 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_63_output.csv
+2025-02-21 22:14:16,775 - INFO - Processing SQL 64: 
+2025-02-21 22:14:16,776 - INFO - Running SQL 64: 
+SELECT hero_id, attribute_value AS Difference FROM hero_attribute 
+JOIN attribute ON hero_attribute.attribute_id = attribute.id GROUP BY hero_id, attribute_value 
+HAVING COUNT(DISTINCT attribute_value) > 1 UNION ALL SELECT hero_id, attribute_value AS Difference 
+FROM hero_attribute JOIN attribute ON hero_attribute.attribute_id = attribute.id 
+GROUP BY hero_id, attribute_value HAVING COUNT(DISTINCT attribute_id) > 1 
+OR (COUNT(attribute_id) != COUNT(*) AND COUNT(DISTINCT attribute_id) > 0)
+
+2025-02-21 22:14:16,783 - INFO - Ran SQL query 64
+2025-02-21 22:14:16,783 - INFO - Cleaning up SQL 64: 
+2025-02-21 22:14:16,783 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_64_output.csv
+2025-02-21 22:14:16,783 - INFO - Processing SQL 65: 
+2025-02-21 22:14:16,783 - INFO - Running SQL 65: SELECT COUNT(*) AS streak_count, 'April Meeting' AS event_name, 'MST' AS timezone, MIN(min_ts) AS start_date, MAX(max_ts) AS end_date FROM ( SELECT *, the_day - row_number() OVER (ORDER BY the_day)::INT AS streak FROM ( SELECT (event_date::TIMESTAMP AT TIME ZONE 'UTC' AT TIME ZONE 'MST')::date AS the_day , count(*) AS ct, min(event_date) AS min_ts, max(event_date) AS max_ts FROM event WHERE event_name = 'April Meeting' GROUP  BY 1) sub1) sub2 GROUP  BY streak ORDER  BY end_date DESC LIMIT  1;
+2025-02-21 22:14:16,784 - INFO - Ran SQL query 65
+2025-02-21 22:14:16,784 - INFO - Cleaning up SQL 65: 
+2025-02-21 22:14:16,784 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_65_output.csv
+2025-02-21 22:14:16,784 - INFO - Processing SQL 66: 
+2025-02-21 22:14:16,784 - INFO - Running SQL 66: select id, date, got, gpt from (select lab1.*, row_number() over (partition by lab1.id order by lab1.date) as rn from laboratory lab1 join (select id, date, got, gpt from (select lab.*, row_number() over (partition by lab.id order by lab.date desc) rn from laboratory lab) lab where rn = 1 ) lab2 on lab2.id = lab1.id and lab1.got = lab2.got and lab1.gpt = lab2.gpt) lab where rn = 1;
+2025-02-21 22:14:16,795 - INFO - Ran SQL query 66
+2025-02-21 22:14:16,795 - INFO - Cleaning up SQL 66: 
+2025-02-21 22:14:16,795 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_66_output.csv
+2025-02-21 22:14:16,795 - INFO - Processing SQL 67: 
+2025-02-21 22:14:16,796 - INFO - Running SQL 67: WITH constructor_roles AS ( SELECT 18 race_id, 1 constructor_id, false customer_billing, true commander, true agent UNION ALL SELECT 18, 2, true, false, false ), tmp AS ( SELECT n.race_id id, array_agg( ARRAY[ CASE WHEN n.customer_billing = TRUE THEN 'AR (Customer Billing)' END, CASE WHEN n.commander = TRUE THEN 'AP (Commander)' END, CASE WHEN n.agent = TRUE THEN 'AP (Agent)' END ] ) AS finance_array FROM constructor_roles n WHERE n.race_id = 18 AND (n.customer_billing = TRUE or n.commander = TRUE or n.agent = TRUE) GROUP BY race_id ) SELECT id, array_to_string(array(select distinct e from unnest(finance_array) as a(e)), ', ') FROM tmp
+2025-02-21 22:14:16,796 - INFO - Ran SQL query 67
+2025-02-21 22:14:16,796 - INFO - Cleaning up SQL 67: 
+2025-02-21 22:14:16,796 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_67_output.csv
+2025-02-21 22:14:16,796 - INFO - Processing SQL 68: CREATE TABLE lineage (id INT PRIMARY KEY, parent_id INT);
+2025-02-21 22:14:16,797 - INFO - Successfully preprocessed SQL 68
+2025-02-21 22:14:16,797 - INFO - Processing SQL 68: INSERT INTO lineage (id, parent_id) SELECT i, CASE WHEN i = 1 THEN NULL ELSE i - 1 END FROM generate_series(1, 1000) AS i;
+2025-02-21 22:14:16,799 - INFO - Successfully preprocessed SQL 68
+2025-02-21 22:14:16,799 - INFO - Processing SQL 68: INSERT INTO lineage (id, parent_id) SELECT 1000 + i, 1000 + i - 1 FROM generate_series(1, 200) AS i;
+2025-02-21 22:14:16,799 - INFO - Successfully preprocessed SQL 68
+2025-02-21 22:14:16,799 - INFO - Processing SQL 68: INSERT INTO lineage (id, parent_id) SELECT 1200 + i, 1000 + i - 1 FROM generate_series(1, 200) AS i;
+2025-02-21 22:14:16,799 - INFO - Successfully preprocessed SQL 68
+2025-02-21 22:14:16,799 - INFO - Running SQL 68: select distinct rarity, first_value(id) over(partition by rarity order by convertedmanacost desc nulls last, edhrecrank desc nulls last, multiverseid asc) from cards;
+2025-02-21 22:14:16,933 - INFO - Ran SQL query 68
+2025-02-21 22:14:16,934 - INFO - Cleaning up SQL 68: DROP TABLE lineage;
+2025-02-21 22:14:16,934 - INFO - Successfully cleaned up SQL 68
+2025-02-21 22:14:16,934 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_68_output.csv
+2025-02-21 22:14:16,934 - INFO - Processing SQL 69: CREATE TABLE user_actions(user_id VARCHAR(1) NOT NULL, action VARCHAR(6) NOT NULL, action_time DATE NOT NULL);
+2025-02-21 22:14:16,934 - INFO - Successfully preprocessed SQL 69
+2025-02-21 22:14:16,934 - INFO - Processing SQL 69: INSERT INTO user_actions(user_id, action, action_time) VALUES ('A', 'LOGIN', '2023-05-01'), ('A', 'SEARCH', '2023-05-02'), ('A', 'SEARCH', '2023-05-03'), ('A', 'BUY', '2023-05-04'), ('B', 'LOGIN', '2023-05-01'), ('B', 'SEARCH', '2023-05-02'), ('B', 'SEARCH', '2023-05-03'), ('B', 'LOGIN', '2023-05-04'), ('B', 'SEARCH', '2023-05-05')
+2025-02-21 22:14:16,934 - INFO - Successfully preprocessed SQL 69
+2025-02-21 22:14:16,934 - INFO - Running SQL 69: SELECT COALESCE (ARRAY_AGG (json_build_object ('client_id', client.client_id, 'gender', client.gender, 'birth_date', client.birth_date)) FILTER (WHERE client.client_id IS NOT NULL), ARRAY[]::json[]) AS clients FROM client;
+2025-02-21 22:14:16,949 - INFO - Ran SQL query 69
+2025-02-21 22:14:16,949 - INFO - Cleaning up SQL 69: DROP TABLE user_actions
+2025-02-21 22:14:16,949 - INFO - Successfully cleaned up SQL 69
+2025-02-21 22:14:16,955 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_69_output.csv
+2025-02-21 22:14:16,955 - INFO - Processing SQL 70: CREATE TABLE decks (id bigint PRIMARY KEY, card_order bigint[]);
+2025-02-21 22:14:16,957 - INFO - Successfully preprocessed SQL 70
+2025-02-21 22:14:16,957 - INFO - Processing SQL 70: INSERT INTO decks (id, card_order) VALUES (1, ARRAY[3, 6, 1]), (2, ARRAY[5, 2, 4]);
+2025-02-21 22:14:16,957 - INFO - Successfully preprocessed SQL 70
+2025-02-21 22:14:16,957 - INFO - Running SQL 70: SELECT raceid, laps AS modal_laps FROM (SELECT raceid, laps, COUNT(*) AS freq, MIN(resultid) AS first_occurrence, ROW_NUMBER() OVER (PARTITION BY raceid ORDER BY COUNT(*) DESC, MIN(resultid) ASC) AS rn FROM results GROUP BY raceid, laps) sub WHERE rn = 1 ORDER BY raceid;
+2025-02-21 22:14:16,969 - INFO - Ran SQL query 70
+2025-02-21 22:14:16,969 - INFO - Cleaning up SQL 70: DROP TABLE decks;
+2025-02-21 22:14:16,969 - INFO - Successfully cleaned up SQL 70
+2025-02-21 22:14:16,969 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_70_output.csv
+2025-02-21 22:14:16,969 - INFO - Processing SQL 71: CREATE TABLE card_prices (start_date DATE, card_id BIGINT, price NUMERIC);
+2025-02-21 22:14:16,970 - INFO - Successfully preprocessed SQL 71
+2025-02-21 22:14:16,971 - INFO - Processing SQL 71: INSERT INTO card_prices (start_date, card_id, price) VALUES ('2023-04-01', 1, 10.0), ('2023-04-15', 1, 20.0), ('2023-04-01', 2, 20.0);
+2025-02-21 22:14:16,971 - INFO - Successfully preprocessed SQL 71
+2025-02-21 22:14:16,971 - INFO - Processing SQL 71: CREATE TABLE order_cards (order_date DATE, order_id BIGINT, card_id BIGINT);
+2025-02-21 22:14:16,971 - INFO - Successfully preprocessed SQL 71
+2025-02-21 22:14:16,971 - INFO - Processing SQL 71: INSERT INTO order_cards (order_date, order_id, card_id) VALUES ('2023-04-01', 10001, 1), ('2023-04-01', 10001, 2), ('2023-04-02', 10002, 1), ('2023-04-02', 10002, 2), ('2023-04-16', 10003, 1), ('2023-04-16', 10003, 2);
+2025-02-21 22:14:16,971 - INFO - Successfully preprocessed SQL 71
+2025-02-21 22:14:16,971 - INFO - Running SQL 71: with hero_attribute(hero_id, attribute_id, attribute_value) as ( values (1, 1, 80), (2, 1, 75), (3, 1, 95), (4, 1, 85), (5, 1, 90), (6, 1, 70) ), running as ( select hero_id, sum(attribute_value) over (order by hero_id rows between 2 preceding and 3 following) from hero_attribute) select sum from running where (hero_id-1) % 2 = 0;
+2025-02-21 22:14:16,971 - INFO - Ran SQL query 71
+2025-02-21 22:14:16,971 - INFO - Cleaning up SQL 71: DROP TABLE card_prices;
+2025-02-21 22:14:16,972 - INFO - Successfully cleaned up SQL 71
+2025-02-21 22:14:16,972 - INFO - Cleaning up SQL 71: DROP TABLE order_cards;
+2025-02-21 22:14:16,972 - INFO - Successfully cleaned up SQL 71
+2025-02-21 22:14:16,972 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_71_output.csv
+2025-02-21 22:14:16,972 - INFO - Processing SQL 72: CREATE TABLE player_stats (player_id INT, stats_keys TEXT, stats_values TEXT);
+2025-02-21 22:14:16,973 - INFO - Successfully preprocessed SQL 72
+2025-02-21 22:14:16,973 - INFO - Processing SQL 72: INSERT INTO player_stats (player_id, stats_keys, stats_values) VALUES (1, 'goals,assists,yellow_cards', '2,1,0'), (2, 'assists,yellow_cards', '0,1'), (3, 'goals,yellow_cards', '1,0'), (4, 'assists,yellow_cards,red_cards', '2,1,0');
+2025-02-21 22:14:16,973 - INFO - Successfully preprocessed SQL 72
+2025-02-21 22:14:16,973 - INFO - Running SQL 72: SELECT DISTINCT ON (examination_year) c, "ANA Pattern", examination_year FROM (SELECT COUNT("ANA Pattern") AS c, "ANA Pattern", EXTRACT(YEAR FROM "Examination Date") AS examination_year FROM examination WHERE EXTRACT(YEAR FROM "Examination Date") BETWEEN 1993 AND 1996 GROUP BY EXTRACT(YEAR FROM "Examination Date"), "ANA Pattern") AS sub ORDER BY examination_year, c DESC;
+2025-02-21 22:14:16,973 - INFO - Ran SQL query 72
+2025-02-21 22:14:16,973 - INFO - Cleaning up SQL 72: DROP TABLE player_stats;
+2025-02-21 22:14:16,974 - INFO - Successfully cleaned up SQL 72
+2025-02-21 22:14:16,974 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_72_output.csv
+2025-02-21 22:14:16,974 - INFO - Processing SQL 73: CREATE TABLE teams_config (configurations jsonb);
+2025-02-21 22:14:16,975 - INFO - Successfully preprocessed SQL 73
+2025-02-21 22:14:16,975 - INFO - Processing SQL 73: INSERT INTO teams_config VALUES ('[{"id": 100, "name": "testOne", "settings": "settingOne"}, {"id": 101, "name": "testTwo", "settings": "settingTwo"}]');
+2025-02-21 22:14:16,975 - INFO - Successfully preprocessed SQL 73
+2025-02-21 22:14:16,975 - INFO - Running SQL 73: SELECT rs.raceId as race_id, (SELECT string_agg(constructorId::TEXT, ',' ORDER BY res.resultId) FROM results res WHERE res.raceId = rs.raceId) as constructor_ids, (SELECT string_agg(p.stop::TEXT, ', ' ORDER BY p.raceId) FROM pitstops p WHERE rs.raceId = p.raceId) AS stops FROM races rs
+2025-02-21 22:14:17,744 - INFO - Ran SQL query 73
+2025-02-21 22:14:17,745 - INFO - Cleaning up SQL 73: DROP TABLE teams_config
+2025-02-21 22:14:17,745 - INFO - Successfully cleaned up SQL 73
+2025-02-21 22:14:17,746 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_73_output.csv
+2025-02-21 22:14:17,746 - INFO - Processing SQL 74: CREATE TABLE race_dates (begin_date DATE NOT NULL, end_date DATE NOT NULL)
+2025-02-21 22:14:17,746 - INFO - Successfully preprocessed SQL 74
+2025-02-21 22:14:17,746 - INFO - Processing SQL 74: INSERT INTO race_dates (begin_date, end_date) VALUES ('2022-01-03', '2022-03-04'), ('2022-01-01', '2022-05-30'), ('2022-01-31', '2022-05-31'), ('2021-11-15', '2022-02-10'), ('2021-12-01', '2022-05-31');
+2025-02-21 22:14:17,747 - INFO - Successfully preprocessed SQL 74
+2025-02-21 22:14:17,747 - INFO - Running SQL 74: select position, array_agg(driverid) as driverids from results where driverid not in (select max(driverid) from results group by position) group by position order by position;
+2025-02-21 22:14:17,755 - INFO - Ran SQL query 74
+2025-02-21 22:14:17,755 - INFO - Cleaning up SQL 74: DROP TABLE race_dates
+2025-02-21 22:14:17,756 - INFO - Successfully cleaned up SQL 74
+2025-02-21 22:14:17,758 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_74_output.csv
+2025-02-21 22:14:17,758 - INFO - Processing SQL 75: 
+    DROP TABLE IF EXISTS new_attendance;
+    
+2025-02-21 22:14:17,758 - INFO - Successfully preprocessed SQL 75
+2025-02-21 22:14:17,758 - INFO - Processing SQL 75: 
+    CREATE TABLE new_attendance AS
+    SELECT DISTINCT link_to_event, link_to_member, NOW() AS date
+    FROM attendance;
+    
+2025-02-21 22:14:17,760 - INFO - Successfully preprocessed SQL 75
+2025-02-21 22:14:17,760 - INFO - Processing SQL 75: 
+    ALTER TABLE new_attendance
+    ADD CONSTRAINT unique_event_member UNIQUE (link_to_event, link_to_member);
+    
+2025-02-21 22:14:17,761 - INFO - Successfully preprocessed SQL 75
+2025-02-21 22:14:17,761 - INFO - Running SQL 75: SELECT * 
+FROM (
+  SELECT gender_id, COUNT(*) as cnt1 
+  FROM superhero 
+  WHERE gender_id IN (1, 2) 
+  GROUP BY gender_id
+) AS g1
+FULL OUTER JOIN (
+  SELECT alignment_id, COUNT(*) as cnt2 
+  FROM superhero 
+  WHERE alignment_id IN (1, 2) 
+  GROUP BY alignment_id
+) AS a1
+ON g1.gender_id = a1.alignment_id
+WHERE COALESCE(g1.gender_id, a1.alignment_id) IN (1, 2);
+2025-02-21 22:14:17,761 - INFO - Ran SQL query 75
+2025-02-21 22:14:17,761 - INFO - No clean up SQL for 75
+2025-02-21 22:14:17,761 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_75_output.csv
+2025-02-21 22:14:17,761 - INFO - Processing SQL 76: 
+    DROP FUNCTION IF EXISTS pg_try_advisory_lock_with_timeout(bigint);
+    
+2025-02-21 22:14:17,762 - INFO - Successfully preprocessed SQL 76
+2025-02-21 22:14:17,762 - INFO - Running SQL 76: SELECT artist, setcode, COUNT(setcode) AS counter
+FROM cards
+GROUP BY artist, setcode
+ORDER BY MAX(COUNT(*)) OVER (PARTITION BY artist) DESC, artist, COUNT(*) DESC, setcode;
+2025-02-21 22:14:17,839 - INFO - Ran SQL query 76
+2025-02-21 22:14:17,839 - INFO - No clean up SQL for 76
+2025-02-21 22:14:17,847 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_76_output.csv
+2025-02-21 22:14:17,847 - INFO - Processing SQL 77: 
+    ALTER TABLE attendance
+    ADD COLUMN hours NUMERIC;
+    
+2025-02-21 22:14:17,847 - INFO - Successfully preprocessed SQL 77
+2025-02-21 22:14:17,847 - INFO - Processing SQL 77: 
+    TRUNCATE TABLE attendance;
+    
+2025-02-21 22:14:17,849 - INFO - Successfully preprocessed SQL 77
+2025-02-21 22:14:17,849 - INFO - Processing SQL 77: 
+    INSERT INTO attendance (link_to_event, link_to_member, hours)
+    VALUES 
+    ('event_1', 'member_1', 64.5),
+    ('event_2', 'member_1', 60.0),
+    ('event_2', 'member_2', 210.5),
+    ('event_3', 'member_3', 237.6);
+    
+2025-02-21 22:14:17,850 - INFO - Running SQL 77: SELECT y.district_id, 
+       array_agg(y.loan_id) FILTER (WHERE y.status IN ('A', 'B')) AS type_A_B, 
+       array_agg(y.loan_id) FILTER (WHERE y.status = 'C') AS type_C
+FROM (
+  SELECT x.district_id, l.loan_id, l.status
+  FROM loan l
+  JOIN account x ON l.account_id = x.account_id
+) y
+GROUP BY 1
+ORDER BY 1;
+2025-02-21 22:14:17,851 - INFO - Ran SQL query 77
+2025-02-21 22:14:17,851 - INFO - No clean up SQL for 77
+2025-02-21 22:14:17,852 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_77_output.csv
+2025-02-21 22:14:17,852 - INFO - Processing SQL 78: 
+        CREATE INDEX ix_account ON account USING btree (district_id, frequency, date);   
+        
+2025-02-21 22:14:17,856 - INFO - Successfully preprocessed SQL 78
+2025-02-21 22:14:17,856 - INFO - Running SQL 78: SELECT league_id, season, STRING_AGG(DISTINCT id::TEXT, ',') as match_ids, STRING_AGG(DISTINCT date:: TEXT, ',') AS match_dates FROM match WHERE season IS NOT NULL AND league_id IS NOT NULL AND date IS NOT NULL GROUP BY league_id, season order by league_id;
+2025-02-21 22:14:17,897 - INFO - Ran SQL query 78
+2025-02-21 22:14:17,897 - INFO - No clean up SQL for 78
+2025-02-21 22:14:17,900 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_78_output.csv
+2025-02-21 22:14:17,900 - INFO - Processing SQL 79: 
+    DROP VIEW IF EXISTS findcount;
+    DROP FUNCTION IF EXISTS findteam;
+    
+2025-02-21 22:14:17,901 - INFO - Successfully preprocessed SQL 79
+2025-02-21 22:14:17,901 - INFO - Processing SQL 79: 
+    create or replace function findteam(text) returns float as $$
+    select cast(count(*) as float)
+    from match m
+    where m.home_team_goal = 2 and m.season = $1;
+    $$ language sql;
+    
+2025-02-21 22:14:17,901 - INFO - Successfully preprocessed SQL 79
+2025-02-21 22:14:17,901 - INFO - Processing SQL 79: 
+    CREATE VIEW findcount AS
+    SELECT season, CAST(10 AS INTEGER) AS team_count
+    from (
+            select distinct season
+            from match
+            where season >= '2008/2009' 
+        ) seasons;
+    
+2025-02-21 22:14:17,901 - INFO - Successfully preprocessed SQL 79
+2025-02-21 22:14:17,901 - INFO - Running SQL 79: SELECT d.the_day AS "Date", COUNT(DISTINCT e.event_id) AS "Number of Events", AVG(b.avg_remaining) AS "Avg Remaining Budget" FROM (SELECT ts::date AS the_day FROM generate_series('2020-01-01'::timestamp, '2020-03-31'::timestamp, '1 day'::interval) AS ts) d LEFT JOIN "event" e ON e.event_date::date = d.the_day AND e.status IN ('Open', 'Closed') LEFT JOIN (SELECT link_to_event, SUM(remaining) as avg_remaining FROM budget GROUP BY link_to_event) b ON b.link_to_event = e.event_id GROUP BY d.the_day ORDER BY d.the_day;
+2025-02-21 22:14:17,902 - INFO - Ran SQL query 79
+2025-02-21 22:14:17,902 - INFO - No clean up SQL for 79
+2025-02-21 22:14:17,902 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_79_output.csv
+2025-02-21 22:14:17,902 - INFO - Processing SQL 80: 
+    ALTER TABLE posts RENAME TO posts_backup;
+    
+2025-02-21 22:14:17,902 - INFO - Successfully preprocessed SQL 80
+2025-02-21 22:14:17,902 - INFO - Processing SQL 80: 
+    CREATE TABLE posts (
+    id INT PRIMARY KEY,
+    posttypeid INT,
+    tags TEXT
+    );
+    
+2025-02-21 22:14:17,904 - INFO - Successfully preprocessed SQL 80
+2025-02-21 22:14:17,904 - INFO - Processing SQL 80: 
+    INSERT INTO posts (id, posttypeid, tags)
+    VALUES 
+    (1, 1, '<bayesian><prior><elicitation>'),
+    (2, 1, '<distributions><normality>'),
+    (3, 1, '<software><open-source>'),
+    (4, 2, '<distributions>'),
+    (5, 2, '<book><code>');
+    
+2025-02-21 22:14:17,904 - INFO - Successfully preprocessed SQL 80
+2025-02-21 22:14:17,904 - INFO - Processing SQL 80: 
+    DROP TABLE IF EXISTS posts_backup;
+    
+2025-02-21 22:14:17,905 - INFO - Running SQL 80: SELECT LPAD(EXTRACT(MONTH FROM trans.date)::text, 2, '0') AS month, SUM(CASE WHEN EXTRACT(YEAR FROM trans.date) = 1997 THEN trans.amount ELSE 0 END) AS a1997, SUM(CASE WHEN EXTRACT(YEAR FROM trans.date) = 1998 THEN trans.amount ELSE 0 END) AS a1998 FROM trans WHERE trans.date >= '1997-01-01' AND trans.date < '1999-01-01' GROUP BY month ORDER BY 1
+2025-02-21 22:14:18,032 - INFO - Ran SQL query 80
+2025-02-21 22:14:18,032 - INFO - No clean up SQL for 80
+2025-02-21 22:14:18,032 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_80_output.csv
+2025-02-21 22:14:18,032 - INFO - Processing SQL 81: 
+CREATE TABLE transaction_info (
+  customerid int,
+  transaction int,
+  first_transaction varchar(10),
+  amount numeric,
+  type numeric,
+  transactionid text
+);
+INSERT INTO transaction_info (customerid, transaction, first_transaction, amount, type, transactionid) VALUES
+(1, 1, 'na', 65250.78, 700000.52, '01010000206A0000000000F0C02E458A4400000000F03F'),
+(1, 2, 'na', 65250.78, 700000.52, '01010000206A0000000000F0C02E458A4400000000F03F'),
+(1, 3, 'na', 65250.78, 700000.52, '01010000206A0000000000F0C02E458A4400000000F03F'),
+(1, 4, 'na', 65999.00, 700555.00, '01010000455A000000000010C03F478A4400000010F03F'),
+(1, 5, 'na', 65999.00, 700555.00, '01010000455A000000000010C03F478A4400000010F03F'),
+(1, 6, 'na', 65999.00, 700555.00, '01010000455A000000000010C03F478A4400000010F03F');            
+
+2025-02-21 22:14:18,033 - INFO - Successfully preprocessed SQL 81
+2025-02-21 22:14:18,033 - INFO - Running SQL 81: SELECT resultid FROM results where driverid in (3, 4) order by resultid DESC LIMIT 10
+2025-02-21 22:14:18,033 - INFO - Ran SQL query 81
+2025-02-21 22:14:18,033 - INFO - Cleaning up SQL 81: 
+DROP TABLE test;
+
+2025-02-21 22:14:18,034 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_81_output.csv
+2025-02-21 22:14:18,034 - INFO - Processing SQL 82: ALTER TABLE bond ADD COLUMN last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+2025-02-21 22:14:18,034 - INFO - Running SQL 82: WITH cte AS (SELECT driverid, points, (points * 100) as earnings FROM driverstandings) SELECT driverid, points, earnings, CASE WHEN earnings > 5000 THEN earnings * 0.2 WHEN earnings > 3000 THEN earnings * 0.15 ELSE null END AS bonus FROM cte
+2025-02-21 22:14:18,048 - INFO - Ran SQL query 82
+2025-02-21 22:14:18,048 - INFO - Cleaning up SQL 82: ALTER TABLE bond DROP COLUMN last_update;
+2025-02-21 22:14:18,063 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_82_output.csv
+2025-02-21 22:14:18,064 - INFO - Processing SQL 83: CREATE TABLE IF NOT EXISTS player_stats_changes ( entity_id TEXT NOT NULL, column_id TEXT NOT NULL, value JSONB NOT NULL, updated_at TIMESTAMP NOT NULL );
+2025-02-21 22:14:18,064 - INFO - Processing SQL 83: INSERT INTO player_stats_changes VALUES ('1', 'height', to_jsonb(140), '01-01-2021 00:00:00'::TIMESTAMP), ('1', 'weight', to_jsonb(30), '01-01-2021 00:00:00'::TIMESTAMP), ('1', 'height', to_jsonb(145), '01-02-2021 00:00:00'::TIMESTAMP), ('1', 'weight', to_jsonb(34), '01-03-2021 00:00:00'::TIMESTAMP);
+2025-02-21 22:14:18,064 - INFO - Running SQL 83: with dataset as (
+  SELECT 
+      date,
+      COUNT(*) as rows_added
+  FROM
+      team_attributes
+  WHERE 
+      date between '2010-01-01 00:00:00'
+      AND '2015-12-31 00:00:00'
+  GROUP BY 
+      date
+ )
+SELECT
+    COUNT(*) as total_days_in_result_set,
+    COUNT(DISTINCT rows_added) as total_days_w_distinct_record_counts,
+    COUNT(*) - COUNT(DISTINCT rows_added) as total_days_w_duplicate_record_counts,
+    COUNT(*) - COUNT(DISTINCT date) as duplicate_dates
+FROM dataset
+2025-02-21 22:14:18,065 - INFO - Ran SQL query 83
+2025-02-21 22:14:18,065 - INFO - Cleaning up SQL 83: DROP TABLE IF EXISTS player_stats_changes;
+2025-02-21 22:14:18,065 - INFO - Successfully cleaned up SQL 83
+2025-02-21 22:14:18,065 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_83_output.csv
+2025-02-21 22:14:18,065 - INFO - Processing SQL 84: CREATE TABLE superhero_group (id INTEGER PRIMARY KEY, subgroup1 INTEGER, subgroup2 INTEGER)
+2025-02-21 22:14:18,066 - INFO - Successfully preprocessed SQL 84
+2025-02-21 22:14:18,066 - INFO - Processing SQL 84: INSERT INTO superhero_group VALUES (1,1,5), (2,1,null), (3,2,null), (4,3,null), (5,3,6), (6,4,6), (7,null,7), (8,null,5), (10,null,5)
+2025-02-21 22:14:18,066 - INFO - Successfully preprocessed SQL 84
+2025-02-21 22:14:18,066 - INFO - Running SQL 84: WITH cte_funding_count AS (SELECT fundingtype, COUNT(*) AS count FROM schools GROUP BY fundingtype), p as( SELECT fundingtype,  count,  ROUND(count*100./(SELECT SUM(count) FROM cte_funding_count),0) AS percent FROM cte_funding_count ) select fundingtype, count, case(row_number() over(order by percent desc)) when 1  then 100 - sum(percent) over(order by percent desc rows between 1 following and unbounded following)  else percent end pp from p
+2025-02-21 22:14:18,070 - INFO - Ran SQL query 84
+2025-02-21 22:14:18,070 - INFO - No clean up SQL for 84
+2025-02-21 22:14:18,070 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_84_output.csv
+2025-02-21 22:14:18,070 - INFO - Processing SQL 85: CREATE TABLE hero_access (superhero_id bigint, read_acl text[]);
+2025-02-21 22:14:18,071 - INFO - Successfully preprocessed SQL 85
+2025-02-21 22:14:18,071 - INFO - Processing SQL 85: CREATE INDEX idx_hero_access_read_acl ON hero_access USING gin (read_acl);
+2025-02-21 22:14:18,071 - INFO - Successfully preprocessed SQL 85
+2025-02-21 22:14:18,071 - INFO - Processing SQL 85: INSERT INTO hero_access (superhero_id, read_acl) SELECT id, ARRAY['1'] FROM superhero ORDER BY random() LIMIT 10;
+2025-02-21 22:14:18,072 - INFO - Successfully preprocessed SQL 85
+2025-02-21 22:14:18,072 - INFO - Running SQL 85: WITH RankedLabs AS (SELECT lab.date AS firstActivity, pat.ID as id, ROW_NUMBER() OVER (PARTITION BY pat.id ORDER BY lab.date ASC) AS rn FROM patient pat JOIN laboratory lab ON lab.id = pat.id AND lab.date <= pat.description AND lab.date > pat."First Date" WHERE pat.sex = 'F') SELECT firstActivity, id FROM RankedLabs WHERE rn = 1 ORDER BY id;
+2025-02-21 22:14:18,076 - INFO - Ran SQL query 85
+2025-02-21 22:14:18,076 - INFO - Cleaning up SQL 85: DROP TABLE hero_access;
+2025-02-21 22:14:18,076 - INFO - Successfully cleaned up SQL 85
+2025-02-21 22:14:18,076 - INFO - Results written to ../../data/bc-1-fexp/data/gtout/query_85_output.csv

@@ -1,0 +1,262 @@
+2025-02-21 22:11:20,016 - INFO - Postgres is already running
+2025-02-21 22:11:22,217 - INFO - Database tensor already exists
+2025-02-21 22:11:22,218 - INFO - Restoring database
+2025-02-21 22:11:22,218 - INFO - Processing alignment.sql
+2025-02-21 22:11:22,218 - INFO - Successfully modified roles in alignment.sql
+2025-02-21 22:11:22,249 - INFO - Successfully restored alignment.sql
+2025-02-21 22:11:22,250 - INFO - Processing hero_power.sql
+2025-02-21 22:11:22,250 - INFO - Successfully modified roles in hero_power.sql
+2025-02-21 22:11:22,287 - INFO - Successfully restored hero_power.sql
+2025-02-21 22:11:22,288 - INFO - Processing member.sql
+2025-02-21 22:11:22,288 - INFO - Successfully modified roles in member.sql
+2025-02-21 22:11:22,321 - INFO - Successfully restored member.sql
+2025-02-21 22:11:22,321 - INFO - Processing yearmonth.sql
+2025-02-21 22:11:22,341 - INFO - Successfully modified roles in yearmonth.sql
+2025-02-21 22:11:22,389 - INFO - Successfully restored yearmonth.sql
+2025-02-21 22:11:22,389 - INFO - Processing player_attributes.sql
+2025-02-21 22:11:22,458 - INFO - Successfully modified roles in player_attributes.sql
+2025-02-21 22:11:22,547 - INFO - Successfully restored player_attributes.sql
+2025-02-21 22:11:22,547 - INFO - Processing circuits.sql
+2025-02-21 22:11:22,548 - INFO - Successfully modified roles in circuits.sql
+2025-02-21 22:11:22,581 - INFO - Successfully restored circuits.sql
+2025-02-21 22:11:22,582 - INFO - Processing expense.sql
+2025-02-21 22:11:22,582 - INFO - Successfully modified roles in expense.sql
+2025-02-21 22:11:22,614 - INFO - Successfully restored expense.sql
+2025-02-21 22:11:22,614 - INFO - Processing educational_resources.sql
+2025-02-21 22:11:22,616 - INFO - Successfully modified roles in educational_resources.sql
+2025-02-21 22:11:22,651 - INFO - Successfully restored educational_resources.sql
+2025-02-21 22:11:22,651 - INFO - Processing customers.sql
+2025-02-21 22:11:22,652 - INFO - Successfully modified roles in customers.sql
+2025-02-21 22:11:22,685 - INFO - Successfully restored customers.sql
+2025-02-21 22:11:22,685 - INFO - Processing votes.sql
+2025-02-21 22:11:22,687 - INFO - Successfully modified roles in votes.sql
+2025-02-21 22:11:22,743 - INFO - Successfully restored votes.sql
+2025-02-21 22:11:22,743 - INFO - Processing league.sql
+2025-02-21 22:11:22,743 - INFO - Successfully modified roles in league.sql
+2025-02-21 22:11:22,775 - INFO - Successfully restored league.sql
+2025-02-21 22:11:22,775 - INFO - Processing constructorresults.sql
+2025-02-21 22:11:22,776 - INFO - Successfully modified roles in constructorresults.sql
+2025-02-21 22:11:22,812 - INFO - Successfully restored constructorresults.sql
+2025-02-21 22:11:22,812 - INFO - Processing external_factors.sql
+2025-02-21 22:11:22,813 - INFO - Successfully modified roles in external_factors.sql
+2025-02-21 22:11:22,847 - INFO - Successfully restored external_factors.sql
+2025-02-21 22:11:22,847 - INFO - Processing laptimes.sql
+2025-02-21 22:11:22,864 - INFO - Successfully modified roles in laptimes.sql
+2025-02-21 22:11:22,995 - INFO - Successfully restored laptimes.sql
+2025-02-21 22:11:22,996 - INFO - Processing colour.sql
+2025-02-21 22:11:22,996 - INFO - Successfully modified roles in colour.sql
+2025-02-21 22:11:23,027 - INFO - Successfully restored colour.sql
+2025-02-21 22:11:23,027 - INFO - Processing trans.sql
+2025-02-21 22:11:23,175 - INFO - Successfully modified roles in trans.sql
+2025-02-21 22:11:23,386 - INFO - Successfully restored trans.sql
+2025-02-21 22:11:23,386 - INFO - Processing races.sql
+2025-02-21 22:11:23,388 - INFO - Successfully modified roles in races.sql
+2025-02-21 22:11:23,423 - INFO - Successfully restored races.sql
+2025-02-21 22:11:23,423 - INFO - Processing constructors.sql
+2025-02-21 22:11:23,424 - INFO - Successfully modified roles in constructors.sql
+2025-02-21 22:11:23,456 - INFO - Successfully restored constructors.sql
+2025-02-21 22:11:23,456 - INFO - Processing gasstations.sql
+2025-02-21 22:11:23,457 - INFO - Successfully modified roles in gasstations.sql
+2025-02-21 22:11:23,489 - INFO - Successfully restored gasstations.sql
+2025-02-21 22:11:23,489 - INFO - Processing transactions_1k.sql
+2025-02-21 22:11:23,489 - INFO - Successfully modified roles in transactions_1k.sql
+2025-02-21 22:11:23,523 - INFO - Successfully restored transactions_1k.sql
+2025-02-21 22:11:23,523 - INFO - Processing schools.sql
+2025-02-21 22:11:23,537 - INFO - Successfully modified roles in schools.sql
+2025-02-21 22:11:23,573 - INFO - Successfully restored schools.sql
+2025-02-21 22:11:23,573 - INFO - Processing drivers.sql
+2025-02-21 22:11:23,574 - INFO - Successfully modified roles in drivers.sql
+2025-02-21 22:11:23,607 - INFO - Successfully restored drivers.sql
+2025-02-21 22:11:23,607 - INFO - Processing team.sql
+2025-02-21 22:11:23,607 - INFO - Successfully modified roles in team.sql
+2025-02-21 22:11:23,639 - INFO - Successfully restored team.sql
+2025-02-21 22:11:23,640 - INFO - Processing budget.sql
+2025-02-21 22:11:23,640 - INFO - Successfully modified roles in budget.sql
+2025-02-21 22:11:23,671 - INFO - Successfully restored budget.sql
+2025-02-21 22:11:23,671 - INFO - Processing event.sql
+2025-02-21 22:11:23,672 - INFO - Successfully modified roles in event.sql
+2025-02-21 22:11:23,702 - INFO - Successfully restored event.sql
+2025-02-21 22:11:23,702 - INFO - Processing rulings.sql
+2025-02-21 22:11:23,776 - INFO - Successfully modified roles in rulings.sql
+2025-02-21 22:11:23,864 - INFO - Successfully restored rulings.sql
+2025-02-21 22:11:23,864 - INFO - Processing foreign_data.sql
+2025-02-21 22:11:24,304 - INFO - Successfully modified roles in foreign_data.sql
+2025-02-21 22:11:24,385 - INFO - Successfully restored foreign_data.sql
+2025-02-21 22:11:24,385 - INFO - Processing curriculum_resources.sql
+2025-02-21 22:11:24,388 - INFO - Successfully modified roles in curriculum_resources.sql
+2025-02-21 22:11:24,426 - INFO - Successfully restored curriculum_resources.sql
+2025-02-21 22:11:24,426 - INFO - Processing income.sql
+2025-02-21 22:11:24,426 - INFO - Successfully modified roles in income.sql
+2025-02-21 22:11:24,457 - INFO - Successfully restored income.sql
+2025-02-21 22:11:24,457 - INFO - Processing resource_usage.sql
+2025-02-21 22:11:24,458 - INFO - Successfully modified roles in resource_usage.sql
+2025-02-21 22:11:24,496 - INFO - Successfully restored resource_usage.sql
+2025-02-21 22:11:24,496 - INFO - Processing results.sql
+2025-02-21 22:11:24,498 - INFO - Successfully modified roles in results.sql
+2025-02-21 22:11:24,540 - INFO - Successfully restored results.sql
+2025-02-21 22:11:24,540 - INFO - Processing products.sql
+2025-02-21 22:11:24,540 - INFO - Successfully modified roles in products.sql
+2025-02-21 22:11:24,571 - INFO - Successfully restored products.sql
+2025-02-21 22:11:24,571 - INFO - Processing connected.sql
+2025-02-21 22:11:24,572 - INFO - Successfully modified roles in connected.sql
+2025-02-21 22:11:24,619 - INFO - Successfully restored connected.sql
+2025-02-21 22:11:24,619 - INFO - Processing posthistory.sql
+2025-02-21 22:11:26,042 - INFO - Successfully modified roles in posthistory.sql
+2025-02-21 22:11:26,280 - INFO - Successfully restored posthistory.sql
+2025-02-21 22:11:26,280 - INFO - Processing hero_attribute.sql
+2025-02-21 22:11:26,290 - INFO - Successfully modified roles in hero_attribute.sql
+2025-02-21 22:11:26,327 - INFO - Successfully restored hero_attribute.sql
+2025-02-21 22:11:26,328 - INFO - Processing outcomes.sql
+2025-02-21 22:11:26,328 - INFO - Successfully modified roles in outcomes.sql
+2025-02-21 22:11:26,368 - INFO - Successfully restored outcomes.sql
+2025-02-21 22:11:26,368 - INFO - Processing users.sql
+2025-02-21 22:11:26,403 - INFO - Successfully modified roles in users.sql
+2025-02-21 22:11:26,441 - INFO - Successfully restored users.sql
+2025-02-21 22:11:26,441 - INFO - Processing institutions.sql
+2025-02-21 22:11:26,442 - INFO - Successfully modified roles in institutions.sql
+2025-02-21 22:11:26,477 - INFO - Successfully restored institutions.sql
+2025-02-21 22:11:26,477 - INFO - Processing status.sql
+2025-02-21 22:11:26,477 - INFO - Successfully modified roles in status.sql
+2025-02-21 22:11:26,509 - INFO - Successfully restored status.sql
+2025-02-21 22:11:26,509 - INFO - Processing posts.sql
+2025-02-21 22:11:27,226 - INFO - Successfully modified roles in posts.sql
+2025-02-21 22:11:27,319 - INFO - Successfully restored posts.sql
+2025-02-21 22:11:27,319 - INFO - Processing card.sql
+2025-02-21 22:11:27,325 - INFO - Successfully modified roles in card.sql
+2025-02-21 22:11:27,359 - INFO - Successfully restored card.sql
+2025-02-21 22:11:27,360 - INFO - Processing laboratory.sql
+2025-02-21 22:11:27,363 - INFO - Successfully modified roles in laboratory.sql
+2025-02-21 22:11:27,402 - INFO - Successfully restored laboratory.sql
+2025-02-21 22:11:27,402 - INFO - Processing client.sql
+2025-02-21 22:11:27,402 - INFO - Successfully modified roles in client.sql
+2025-02-21 22:11:27,436 - INFO - Successfully restored client.sql
+2025-02-21 22:11:27,436 - INFO - Processing frpm.sql
+2025-02-21 22:11:27,441 - INFO - Successfully modified roles in frpm.sql
+2025-02-21 22:11:27,474 - INFO - Successfully restored frpm.sql
+2025-02-21 22:11:27,474 - INFO - Processing major.sql
+2025-02-21 22:11:27,474 - INFO - Successfully modified roles in major.sql
+2025-02-21 22:11:27,505 - INFO - Successfully restored major.sql
+2025-02-21 22:11:27,505 - INFO - Processing comments.sql
+2025-02-21 22:11:27,795 - INFO - Successfully modified roles in comments.sql
+2025-02-21 22:11:27,861 - INFO - Successfully restored comments.sql
+2025-02-21 22:11:27,861 - INFO - Processing badges.sql
+2025-02-21 22:11:27,870 - INFO - Successfully modified roles in badges.sql
+2025-02-21 22:11:27,907 - INFO - Successfully restored badges.sql
+2025-02-21 22:11:27,907 - INFO - Processing set_translations.sql
+2025-02-21 22:11:27,908 - INFO - Successfully modified roles in set_translations.sql
+2025-02-21 22:11:27,943 - INFO - Successfully restored set_translations.sql
+2025-02-21 22:11:27,943 - INFO - Processing legalities.sql
+2025-02-21 22:11:27,982 - INFO - Successfully modified roles in legalities.sql
+2025-02-21 22:11:28,047 - INFO - Successfully restored legalities.sql
+2025-02-21 22:11:28,047 - INFO - Processing superhero.sql
+2025-02-21 22:11:28,048 - INFO - Successfully modified roles in superhero.sql
+2025-02-21 22:11:28,083 - INFO - Successfully restored superhero.sql
+2025-02-21 22:11:28,083 - INFO - Processing pitstops.sql
+2025-02-21 22:11:28,084 - INFO - Successfully modified roles in pitstops.sql
+2025-02-21 22:11:28,116 - INFO - Successfully restored pitstops.sql
+2025-02-21 22:11:28,116 - INFO - Processing atom.sql
+2025-02-21 22:11:28,117 - INFO - Successfully modified roles in atom.sql
+2025-02-21 22:11:28,152 - INFO - Successfully restored atom.sql
+2025-02-21 22:11:28,152 - INFO - Processing satscores.sql
+2025-02-21 22:11:28,153 - INFO - Successfully modified roles in satscores.sql
+2025-02-21 22:11:28,184 - INFO - Successfully restored satscores.sql
+2025-02-21 22:11:28,185 - INFO - Processing driverstandings.sql
+2025-02-21 22:11:28,186 - INFO - Successfully modified roles in driverstandings.sql
+2025-02-21 22:11:28,221 - INFO - Successfully restored driverstandings.sql
+2025-02-21 22:11:28,221 - INFO - Processing team_attributes.sql
+2025-02-21 22:11:28,221 - INFO - Successfully modified roles in team_attributes.sql
+2025-02-21 22:11:28,254 - INFO - Successfully restored team_attributes.sql
+2025-02-21 22:11:28,255 - INFO - Processing curricula.sql
+2025-02-21 22:11:28,255 - INFO - Successfully modified roles in curricula.sql
+2025-02-21 22:11:28,289 - INFO - Successfully restored curricula.sql
+2025-02-21 22:11:28,289 - INFO - Processing patient.sql
+2025-02-21 22:11:28,290 - INFO - Successfully modified roles in patient.sql
+2025-02-21 22:11:28,322 - INFO - Successfully restored patient.sql
+2025-02-21 22:11:28,322 - INFO - Processing bond.sql
+2025-02-21 22:11:28,323 - INFO - Successfully modified roles in bond.sql
+2025-02-21 22:11:28,357 - INFO - Successfully restored bond.sql
+2025-02-21 22:11:28,357 - INFO - Processing loan.sql
+2025-02-21 22:11:28,358 - INFO - Successfully modified roles in loan.sql
+2025-02-21 22:11:28,390 - INFO - Successfully restored loan.sql
+2025-02-21 22:11:28,390 - INFO - Processing learners.sql
+2025-02-21 22:11:28,392 - INFO - Successfully modified roles in learners.sql
+2025-02-21 22:11:28,426 - INFO - Successfully restored learners.sql
+2025-02-21 22:11:28,426 - INFO - Processing performance_predictions.sql
+2025-02-21 22:11:28,427 - INFO - Successfully modified roles in performance_predictions.sql
+2025-02-21 22:11:28,460 - INFO - Successfully restored performance_predictions.sql
+2025-02-21 22:11:28,461 - INFO - Processing qualifying.sql
+2025-02-21 22:11:28,461 - INFO - Successfully modified roles in qualifying.sql
+2025-02-21 22:11:28,495 - INFO - Successfully restored qualifying.sql
+2025-02-21 22:11:28,495 - INFO - Processing seasons.sql
+2025-02-21 22:11:28,495 - INFO - Successfully modified roles in seasons.sql
+2025-02-21 22:11:28,526 - INFO - Successfully restored seasons.sql
+2025-02-21 22:11:28,526 - INFO - Processing enrollment.sql
+2025-02-21 22:11:28,527 - INFO - Successfully modified roles in enrollment.sql
+2025-02-21 22:11:28,560 - INFO - Successfully restored enrollment.sql
+2025-02-21 22:11:28,560 - INFO - Processing disp.sql
+2025-02-21 22:11:28,560 - INFO - Successfully modified roles in disp.sql
+2025-02-21 22:11:28,594 - INFO - Successfully restored disp.sql
+2025-02-21 22:11:28,594 - INFO - Processing sets.sql
+2025-02-21 22:11:28,595 - INFO - Successfully modified roles in sets.sql
+2025-02-21 22:11:28,627 - INFO - Successfully restored sets.sql
+2025-02-21 22:11:28,627 - INFO - Processing player.sql
+2025-02-21 22:11:28,629 - INFO - Successfully modified roles in player.sql
+2025-02-21 22:11:28,663 - INFO - Successfully restored player.sql
+2025-02-21 22:11:28,663 - INFO - Processing match.sql
+2025-02-21 22:11:29,383 - INFO - Successfully modified roles in match.sql
+2025-02-21 22:11:29,547 - INFO - Successfully restored match.sql
+2025-02-21 22:11:29,547 - INFO - Processing target_labels.sql
+2025-02-21 22:11:29,555 - INFO - Successfully modified roles in target_labels.sql
+2025-02-21 22:11:29,591 - INFO - Successfully restored target_labels.sql
+2025-02-21 22:11:29,591 - INFO - Processing race.sql
+2025-02-21 22:11:29,591 - INFO - Successfully modified roles in race.sql
+2025-02-21 22:11:29,622 - INFO - Successfully restored race.sql
+2025-02-21 22:11:29,622 - INFO - Processing examination.sql
+2025-02-21 22:11:29,623 - INFO - Successfully modified roles in examination.sql
+2025-02-21 22:11:29,655 - INFO - Successfully restored examination.sql
+2025-02-21 22:11:29,655 - INFO - Processing zip_code.sql
+2025-02-21 22:11:29,661 - INFO - Successfully modified roles in zip_code.sql
+2025-02-21 22:11:29,695 - INFO - Successfully restored zip_code.sql
+2025-02-21 22:11:29,695 - INFO - Processing publisher.sql
+2025-02-21 22:11:29,696 - INFO - Successfully modified roles in publisher.sql
+2025-02-21 22:11:29,726 - INFO - Successfully restored publisher.sql
+2025-02-21 22:11:29,726 - INFO - Processing country.sql
+2025-02-21 22:11:29,726 - INFO - Successfully modified roles in country.sql
+2025-02-21 22:11:29,758 - INFO - Successfully restored country.sql
+2025-02-21 22:11:29,758 - INFO - Processing account.sql
+2025-02-21 22:11:29,758 - INFO - Successfully modified roles in account.sql
+2025-02-21 22:11:29,792 - INFO - Successfully restored account.sql
+2025-02-21 22:11:29,792 - INFO - Processing district.sql
+2025-02-21 22:11:29,793 - INFO - Successfully modified roles in district.sql
+2025-02-21 22:11:29,823 - INFO - Successfully restored district.sql
+2025-02-21 22:11:29,823 - INFO - Processing constructorstandings.sql
+2025-02-21 22:11:29,824 - INFO - Successfully modified roles in constructorstandings.sql
+2025-02-21 22:11:29,858 - INFO - Successfully restored constructorstandings.sql
+2025-02-21 22:11:29,858 - INFO - Processing order.sql
+2025-02-21 22:11:29,859 - INFO - Successfully modified roles in order.sql
+2025-02-21 22:11:29,891 - INFO - Successfully restored order.sql
+2025-02-21 22:11:29,891 - INFO - Processing gender.sql
+2025-02-21 22:11:29,891 - INFO - Successfully modified roles in gender.sql
+2025-02-21 22:11:29,921 - INFO - Successfully restored gender.sql
+2025-02-21 22:11:29,921 - INFO - Processing attendance.sql
+2025-02-21 22:11:29,922 - INFO - Successfully modified roles in attendance.sql
+2025-02-21 22:11:29,952 - INFO - Successfully restored attendance.sql
+2025-02-21 22:11:29,952 - INFO - Processing postlinks.sql
+2025-02-21 22:11:29,953 - INFO - Successfully modified roles in postlinks.sql
+2025-02-21 22:11:29,986 - INFO - Successfully restored postlinks.sql
+2025-02-21 22:11:29,986 - INFO - Processing cards.sql
+2025-02-21 22:11:30,323 - INFO - Successfully modified roles in cards.sql
+2025-02-21 22:11:30,387 - INFO - Successfully restored cards.sql
+2025-02-21 22:11:30,387 - INFO - Processing molecule.sql
+2025-02-21 22:11:30,390 - INFO - Successfully modified roles in molecule.sql
+2025-02-21 22:11:30,422 - INFO - Successfully restored molecule.sql
+2025-02-21 22:11:30,422 - INFO - Processing superpower.sql
+2025-02-21 22:11:30,422 - INFO - Successfully modified roles in superpower.sql
+2025-02-21 22:11:30,453 - INFO - Successfully restored superpower.sql
+2025-02-21 22:11:30,453 - INFO - Processing attribute.sql
+2025-02-21 22:11:30,453 - INFO - Successfully modified roles in attribute.sql
+2025-02-21 22:11:30,484 - INFO - Successfully restored attribute.sql
+2025-02-21 22:11:30,484 - INFO - Processing tags.sql
+2025-02-21 22:11:30,484 - INFO - Successfully modified roles in tags.sql
+2025-02-21 22:11:30,516 - INFO - Successfully restored tags.sql
+2025-02-21 22:11:30,516 - INFO - Successfully restored 86 / 86 SQL files
